@@ -61,12 +61,13 @@ class GTRRCNN(CustomRCNN):
                 return self.sliding_inference(batched_inputs)
 
         images = self.preprocess_image(batched_inputs)
-        # print('images:', len(images))
         features = self.backbone(images.tensor)
+        # print('features-p3:', features['p3'].shape, 'features-p4', features['p4'].shape)
         gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
         proposals, proposal_losses = self.proposal_generator(
             images, features, gt_instances)
-        print('proposals[0]:', type(proposals[0]))
+        # print('proposals:', len(proposals), 'images:', len(images))
+        # print('proposals[0]:', type(proposals[0].get('proposal_boxes')), proposals[0].get('objectness_logits').shape)
         _, detector_losses = self.roi_heads(
             images, features, proposals, gt_instances)
         losses = {}

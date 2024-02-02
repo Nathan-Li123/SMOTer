@@ -488,6 +488,7 @@ class GTRROIHeads(CascadeROIHeads):
         """
         if self.training:
             proposals = self.label_and_sample_proposals(proposals, targets)
+        # print(proposals[0].get_fields().keys()) -> ['proposal_boxes', 'objectness_logits', 'gt_classes', 'gt_boxes', 'gt_instance_ids']
 
         if self.training:
             if self.no_box_head:

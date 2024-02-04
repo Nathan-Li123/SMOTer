@@ -1,6 +1,6 @@
 _BASE_: "Base-CenterNet.yaml"
 MODEL:
-  META_ARCHITECTURE: "GTRRCNN"
+  META_ARCHITECTURE: "BYTERCNN"
   CENTERNET:
     USE_DEFORMABLE: True
     NMS_TH_TEST: 0.6
@@ -17,9 +17,10 @@ MODEL:
     ASSO_WEIGHT: 1.0
     NUM_WEIGHT_LAYERS: 0
     NO_POS_EMB: True
+  FREEZE_TYPE: 'ROIheads'
 SOLVER:
   USE_CUSTOM_SOLVER: True
-  MAX_ITER: 8000
+  MAX_ITER: 20000
   LR_SCHEDULER_NAME: "WarmupCosineLR"
   BASE_LR: 0.00005
   OPTIMIZER: ADAMW
@@ -38,7 +39,7 @@ INPUT:
   TEST_INPUT_TYPE: square
   TEST_SIZE: 1560
   VIDEO:
-    TRAIN_LEN: 8
+    TRAIN_LEN: 64
     TEST_LEN: 32
 VIDEO_INPUT: True
 VIDEO_TEST:
@@ -49,8 +50,8 @@ VIDEO_TEST:
   NOT_MULT_THRESH: True
 DATASETS:
   # TRAIN: ("mot17_halftrain","crowdhuman_train")
-  TRAIN: ("mot17_halftrain",)
-  TEST: ("mot17_halfval",)
+  TRAIN: ("cvid_train",)
+  TEST: ("cvid_val",)
 FIND_UNUSED_PARAM: True
 DATALOADER:
   SAMPLER_TRAIN: "MultiDatasetSampler"

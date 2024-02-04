@@ -75,7 +75,7 @@ def add_gtr_config(cfg):
     _C.VIDEO_TEST.MAX_CENTER_DIST = -1. # threshold for continuing a tracking or starting a new track
     _C.VIDEO_TEST.DECAY_TIME = -1. # reweighting hyper-parameters for association
     _C.VIDEO_TEST.WITH_IOU = False # combining with location in our tracker
-    _C.VIDEO_TEST.LOCAL_TRACK = False # Run our baseline tracker
+    _C.VIDEO_TEST.LOCAL_TRACK = True # Run our baseline tracker
     _C.VIDEO_TEST.LOCAL_IOU_ONLY = False # IOU-only baseline
     _C.VIDEO_TEST.LOCAL_NO_IOU = False # ReID-only baseline
 

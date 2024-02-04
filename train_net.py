@@ -48,6 +48,7 @@ from gtr.data.gtr_dataset_mapper import GTRDatasetMapper
 from gtr.costom_solver import build_custom_optimizer
 from gtr.evaluation.custom_lvis_evaluation import CustomLVISEvaluator
 from gtr.evaluation.mot_evaluation import MOTEvaluator
+from gtr.evaluation.cvid_evaluation import CVIDEvaluator
 from gtr.modeling.freeze_layers import check_if_freeze_model
 
 import warnings
@@ -78,8 +79,9 @@ def do_test(cfg, model):
         elif evaluator_type == 'coco':
             evaluator = COCOEvaluator(dataset_name, cfg, True, output_folder)
         elif evaluator_type == 'mot':
-            evaluator = MOTEvaluator(dataset_name, cfg, \
-                    False, output_folder)
+            evaluator = MOTEvaluator(dataset_name, cfg, False, output_folder)
+        elif evaluator_type == 'cvid':
+            evaluator = CVIDEvaluator(dataset_name, cfg, False, output_folder)
         else:
             assert 0, evaluator_type
 

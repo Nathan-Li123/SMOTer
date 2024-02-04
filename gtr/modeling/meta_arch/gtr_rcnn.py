@@ -9,6 +9,7 @@ from detectron2.structures import Boxes, pairwise_iou, Instances
 from detectron2.modeling.meta_arch.build import META_ARCH_REGISTRY
 from .custom_rcnn import CustomRCNN
 from ..roi_heads.custom_fast_rcnn import custom_fast_rcnn_inference
+from ..tracker.byte_tracker import BYTETracker
 
 @META_ARCH_REGISTRY.register()
 class GTRRCNN(CustomRCNN):
@@ -254,9 +255,11 @@ class GTRRCNN(CustomRCNN):
 
     def local_tracker_inference(self, batched_inputs):
         from ...tracking.local_tracker.fairmot import FairMOT
+        # local_tracker = BYTETracker()
         local_tracker = FairMOT(
             no_iou=self.local_no_iou,
-            iou_only=self.local_iou_only)
+            iou_only=self.local_iou_only
+        )
 
         video_len = len(batched_inputs)
         instances = []

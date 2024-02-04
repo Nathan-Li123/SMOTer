@@ -2,6 +2,7 @@ third_party/detectron2
 backup
 GTR_models
 GTR_models_TAO
+datasets
 *.pth
 slurm-*.out
 slurm-output

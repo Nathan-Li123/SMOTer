@@ -1,4 +1,5 @@
 import copy
+import json
 import logging
 import torch
 import torch.utils.data
@@ -109,6 +110,22 @@ def get_video_dataset_dicts(
     for source_id, (dataset_name, dicts) in enumerate(
         zip(dataset_names, dataset_dicts)):
         assert len(dicts), "Dataset '{}' is empty!".format(dataset_name)
+        # mod for vu 01
+        if dataset_name == 'cvid_train':
+            json_path = 'datasets/cvid/annotations/train_vu.json'
+        elif dataset_name == 'cvid_val':
+            json_path = 'datasets/cvid/annotations/val_vu.json'
+        
+        if 'cvid' in dataset_name:
+            with open(json_path, 'r') as f:
+                videos_data = json.load(f)['videos']
+            video_dict = {}
+            for video_data in videos_data:
+                video_dict[video_data['id']] = {}
+                video_dict[video_data['id']]['summary'] = video_data['summary']
+                video_dict[video_data['id']]['caption'] = video_data['caption']
+                video_dict[video_data['id']]['relation'] = video_data['relation']
+        # end mod for vu 01
         videos = {}
         single_video_id = 1000000
         id_map = {}
@@ -133,6 +150,13 @@ def get_video_dataset_dicts(
                         id_map[x['instance_id']] = tot_inst_count
                     x['instance_id'] = id_map[x['instance_id']]
             videos[video_id]['images'].append(image)
+        # mod for vu 02
+        if 'cvid' in dataset_name:
+            for v_id in videos.keys():
+                videos[v_id]['summary'] = video_dict[v_id]['summary']
+                videos[v_id]['caption'] = video_dict[v_id]['caption']
+                videos[v_id]['relation'] = video_dict[v_id]['relation']
+        # end mod for vu 02
         video_datasets.append([v for v in videos.values()])
     video_datasets = list(itertools.chain.from_iterable(video_datasets))
     return video_datasets

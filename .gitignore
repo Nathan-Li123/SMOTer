@@ -10,6 +10,7 @@ slurm-output
 output
 instant_test_output
 inference_test_output
+bert-base-uncased
 
 
 *.png

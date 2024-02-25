@@ -139,6 +139,7 @@ def inference_on_dataset(
     if isinstance(evaluator, abc.MutableSequence):
         evaluator = DatasetEvaluators(evaluator)
     evaluator.reset()
+    summaries, captions, relations = [], [], []
 
     num_warmup = min(5, total - 1)
     start_time = time.perf_counter()
@@ -162,7 +163,10 @@ def inference_on_dataset(
 
             start_compute_time = time.perf_counter()
             dict.get(callbacks or {}, "before_inference", lambda: None)()
-            outputs = model(inputs)
+            outputs, summary, caption, relation = model(inputs)
+            summaries.append(summary)
+            captions.append(caption)
+            relations.append(relation)
             dict.get(callbacks or {}, "after_inference", lambda: None)()
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
@@ -215,7 +219,7 @@ def inference_on_dataset(
     # Replace it by an empty dict instead to make it easier for downstream code to handle
     if results is None:
         results = {}
-    return results
+    return results, summaries, captions, relations
 
 
 @contextmanager

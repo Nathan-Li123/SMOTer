@@ -194,6 +194,12 @@ class GTRDatasetMapper(DatasetMapper):
             images_dict = copy.deepcopy([video_dict['images'][x] for x in inds])
         else:
             images_dict = copy.deepcopy(video_dict['images'][st: st + num_frames])
+
+        # mod for vu
+        summary = video_dict['summary']
+        caption = video_dict['caption']
+        relation = video_dict['relation']
+        # end mod for vu
         
         ret = []
         for i, dataset_dict in enumerate(images_dict):
@@ -214,7 +220,7 @@ class GTRDatasetMapper(DatasetMapper):
             dataset_dict["image"] = torch.as_tensor(np.ascontiguousarray(image.transpose(2, 0, 1)))
 
             if not self.is_train:
-                dataset_dict.pop("annotations", None)
+                # dataset_dict.pop("annotations", None)
                 dataset_dict.pop("sem_seg_file_name", None)
 
             if "annotations" in dataset_dict:
@@ -241,4 +247,5 @@ class GTRDatasetMapper(DatasetMapper):
                 del all_annos
                 dataset_dict["instances"] = utils.filter_empty_instances(instances)
             ret.append(dataset_dict)
+        ret.append({'summary': summary, 'caption': caption, 'relation': relation})
         return ret

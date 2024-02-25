@@ -1,5 +1,6 @@
 import logging
 import os
+import json
 from collections import OrderedDict
 import torch
 from torch.nn.parallel import DistributedDataParallel
@@ -54,6 +55,9 @@ from gtr.modeling.freeze_layers import check_if_freeze_model
 import warnings
 warnings.filterwarnings("ignore")
 
+import torch.multiprocessing
+torch.multiprocessing.set_sharing_strategy('file_system')
+
 
 logger = logging.getLogger("detectron2")
 
@@ -67,8 +71,26 @@ def get_total_grad_norm(parameters, norm_type=2):
     return total_norm
 
 
+def write_txt_file(results, re_type='summary'):
+    out_root = 'output/pred_results'
+    out_path = os.path.join(out_root, str(re_type) + '_results.json')
+    total_preds, total_gts = [], []
+    for result in results:
+        preds = list(result['pred'])
+        gts = list(result['gt'])
+        total_preds.extend(preds)
+        total_gts.extend(gts)
+    assert len(total_gts) == len(total_preds)
+    out_dict = {'preds': total_preds, 'gts': total_gts}
+    with open(out_path, 'w') as f:
+        json.dump(out_dict, f)
+
+
 def do_test(cfg, model):
     results = OrderedDict()
+    summary = OrderedDict()
+    caption = OrderedDict()
+    relation = OrderedDict()
     for dataset_name in cfg.DATASETS.TEST:
         output_folder = os.path.join(
             cfg.OUTPUT_DIR, "inference_{}".format(dataset_name))
@@ -104,15 +126,16 @@ def do_test(cfg, model):
                 mapper = GTRDatasetMapper(
                     cfg, False, augmentations=build_custom_augmentation(cfg, False))
             data_loader = build_gtr_test_loader(cfg, dataset_name, mapper)
-            # TODO (Xingyi): create a new video inference pipeline
-            results[dataset_name] = inference_on_dataset(
+            results[dataset_name], summary[dataset_name], caption[dataset_name], relation[dataset_name] = inference_on_dataset(
                 model, data_loader, evaluator, 
             )
         
         if comm.is_main_process():
-            logger.info("Evaluation results for {} in csv format:".format(
-                dataset_name))
+            logger.info("Evaluation results for {} in csv format:".format(dataset_name))
             print_csv_format(results[dataset_name])
+            write_txt_file(summary[dataset_name], 'summary')
+            write_txt_file(caption[dataset_name], 'caption')
+            write_txt_file(relation[dataset_name], 'relation')
     if len(results) == 1:
         results = list(results.values())[0]
     return results
@@ -176,7 +199,7 @@ def do_train(cfg, model, resume=False):
             step_timer.reset()
             iteration = iteration + 1
             storage.step()
-            loss_dict = model(data)
+            loss_dict = model(data, iteration)
             
             losses = sum(
                 loss for k, loss in loss_dict.items() if 'loss' in k)

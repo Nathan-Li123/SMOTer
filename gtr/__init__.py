@@ -8,3 +8,4 @@ from .modeling.meta_arch import custom_rcnn
 from .modeling.meta_arch import gtr_rcnn
 from .modeling.meta_arch import byte_rcnn
 from .modeling.roi_heads import gtr_roi_heads
+from .modeling.roi_heads import grit_roi_heads

@@ -1,0 +1,1831 @@
+BYTERCNN(
+  (backbone): BiFPN(
+    (bottom_up): DLA(
+      (base_layer): Sequential(
+        (0): Conv2d(3, 16, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level0): Sequential(
+        (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level1): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level2): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level3): Tree(
+        (tree1): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+          (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (project): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (tree2): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(448, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level4): Tree(
+        (tree1): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+          (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (project): Sequential(
+            (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (tree2): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(896, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level5): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(1280, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (resample): SequentialAppendLast(
+      (3): ResampleFeatureMap(
+        (conv): ConvBnAct2d(
+          (conv): Conv2d(512, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+      (4): ResampleFeatureMap(
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+    )
+    (cell): Sequential(
+      (0): BiFpnLayer(
+        (fnode): SequentialAppend(
+          (0): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (4): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (1): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(512, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (5): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (2): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(256, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (6): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (3): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (0): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(128, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (7): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (4): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(256, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (7): ResampleFeatureMap()
+                (8): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (5): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(512, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (6): ResampleFeatureMap()
+                (9): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (6): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (5): ResampleFeatureMap()
+                (10): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (7): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (4): ResampleFeatureMap()
+                (11): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+        )
+      )
+      (1): BiFpnLayer(
+        (fnode): SequentialAppend(
+          (0): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (4): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (1): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap()
+                (5): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (2): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap()
+                (6): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (3): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (0): ResampleFeatureMap()
+                (7): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (4): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap()
+                (7): ResampleFeatureMap()
+                (8): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (5): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap()
+                (6): ResampleFeatureMap()
+                (9): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (6): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (5): ResampleFeatureMap()
+                (10): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (7): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (4): ResampleFeatureMap()
+                (11): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+        )
+      )
+      (2): BiFpnLayer(
+        (fnode): SequentialAppend(
+          (0): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (4): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (1): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap()
+                (5): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (2): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap()
+                (6): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (3): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (0): ResampleFeatureMap()
+                (7): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (4): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap()
+                (7): ResampleFeatureMap()
+                (8): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (5): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap()
+                (6): ResampleFeatureMap()
+                (9): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (6): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (5): ResampleFeatureMap()
+                (10): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (7): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (4): ResampleFeatureMap()
+                (11): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): CenterNet(
+    (iou_loss): IOULoss()
+    (centernet_head): CenterNetHead(
+      (cls_tower): Sequential()
+      (bbox_tower): Sequential(
+        (0): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): GroupNorm(32, 160, eps=1e-05, affine=True)
+        (2): ReLU()
+        (3): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): GroupNorm(32, 160, eps=1e-05, affine=True)
+        (5): ReLU()
+        (6): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (7): GroupNorm(32, 160, eps=1e-05, affine=True)
+        (8): ReLU()
+        (9): DFConv2d(
+          (offset): Conv2d(160, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=160, out_channels=160, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (10): GroupNorm(32, 160, eps=1e-05, affine=True)
+        (11): ReLU()
+      )
+      (share_tower): Sequential()
+      (bbox_pred): Conv2d(160, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (scales): ModuleList(
+        (0): Scale()
+        (1): Scale()
+        (2): Scale()
+        (3): Scale()
+        (4): Scale()
+      )
+      (agn_hm): Conv2d(160, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (roi_heads): GRiTROIHeads(
+    (text_decoder): GRiTTextDecoder(
+      (textual): TransformerDecoderTextualHead(
+        (object_feature_projection): Sequential(
+          (0): Linear(in_features=256, out_features=768, bias=True)
+          (1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (embedding): WordAndPositionalEmbedding(
+          (words): Embedding(30522, 768)
+          (positions): Embedding(1024, 768)
+          (layer_norm): LayerNorm((768,), eps=1e-08, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (transformer): BertEncoderAsDecoder(
+          (encoder): BertEncoder(
+            (layer): ModuleList(
+              (0): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (1): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (2): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (3): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (4): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (5): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+            )
+          )
+        )
+        (output): Linear(in_features=768, out_features=30522, bias=True)
+      )
+      (loss): SmoothLabelCrossEntropyLoss(
+        (log_soft): LogSoftmax(dim=1)
+        (kl): KLDivLoss()
+      )
+    )
+    (summary_fusion_module): FusionModule(
+      (decoder): Decoder(
+        (multihead_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=1024, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=1024, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+      (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+    )
+    (caption_fusion_module): FusionModule(
+      (encoder): Encoder(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+    )
+    (relation_fusion_module): FusionModule(
+      (decoder): Decoder(
+        (multihead_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=1024, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=1024, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+      (avg_pool): AdaptiveAvgPool1d(output_size=128)
+    )
+    (classifier): Classifier(
+      (adapter): Adapter(
+        (linear_1): Linear(in_features=32768, out_features=2048, bias=True)
+        (linear_2): Linear(in_features=2048, out_features=2048, bias=True)
+        (linear_3): Linear(in_features=2048, out_features=360, bias=True)
+        (relu): ReLU()
+      )
+      (loss_func): FocalLoss()
+    )
+  )
+  (asso_pooler): ROIPooler(
+    (level_poolers): ModuleList(
+      (0): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=0, aligned=True)
+    )
+  )
+  (asso_head): FCHead(
+    (fc1): Linear(in_features=7840, out_features=1024, bias=True)
+    (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+  )
+)BYTERCNN(
+  (backbone): BiFPN(
+    (bottom_up): DLA(
+      (base_layer): Sequential(
+        (0): Conv2d(3, 16, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level0): Sequential(
+        (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level1): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level2): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level3): Tree(
+        (tree1): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+          (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (project): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (tree2): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(448, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level4): Tree(
+        (tree1): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+          (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (project): Sequential(
+            (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (tree2): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(896, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level5): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(1280, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (resample): SequentialAppendLast(
+      (3): ResampleFeatureMap(
+        (conv): ConvBnAct2d(
+          (conv): Conv2d(512, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+      (4): ResampleFeatureMap(
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+    )
+    (cell): Sequential(
+      (0): BiFpnLayer(
+        (fnode): SequentialAppend(
+          (0): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (4): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (1): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(512, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (5): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (2): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(256, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (6): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (3): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (0): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(128, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (7): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (4): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(256, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (7): ResampleFeatureMap()
+                (8): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (5): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap(
+                  (conv): ConvBnAct2d(
+                    (conv): Conv2d(512, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                    (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+                  )
+                )
+                (6): ResampleFeatureMap()
+                (9): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (6): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (5): ResampleFeatureMap()
+                (10): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (7): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (4): ResampleFeatureMap()
+                (11): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+        )
+      )
+      (1): BiFpnLayer(
+        (fnode): SequentialAppend(
+          (0): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (4): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (1): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap()
+                (5): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (2): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap()
+                (6): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (3): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (0): ResampleFeatureMap()
+                (7): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (4): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap()
+                (7): ResampleFeatureMap()
+                (8): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (5): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap()
+                (6): ResampleFeatureMap()
+                (9): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (6): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (5): ResampleFeatureMap()
+                (10): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (7): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (4): ResampleFeatureMap()
+                (11): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+        )
+      )
+      (2): BiFpnLayer(
+        (fnode): SequentialAppend(
+          (0): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (4): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (1): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap()
+                (5): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (2): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap()
+                (6): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (3): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (0): ResampleFeatureMap()
+                (7): ResampleFeatureMap(
+                  (upsample): UpsamplingNearest2d(scale_factor=2.0, mode=nearest)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (4): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (1): ResampleFeatureMap()
+                (7): ResampleFeatureMap()
+                (8): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (5): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (2): ResampleFeatureMap()
+                (6): ResampleFeatureMap()
+                (9): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (6): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (3): ResampleFeatureMap()
+                (5): ResampleFeatureMap()
+                (10): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+          (7): Sequential(
+            (combine): FpnCombine(
+              (resample): ModuleDict(
+                (4): ResampleFeatureMap()
+                (11): ResampleFeatureMap(
+                  (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+                )
+              )
+            )
+            (after_combine): Sequential(
+              (act): Swish()
+              (conv): ConvBnAct2d(
+                (conv): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                (bn): GroupNorm(32, 160, eps=1e-05, affine=True)
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): CenterNet(
+    (iou_loss): IOULoss()
+    (centernet_head): CenterNetHead(
+      (cls_tower): Sequential()
+      (bbox_tower): Sequential(
+        (0): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): GroupNorm(32, 160, eps=1e-05, affine=True)
+        (2): ReLU()
+        (3): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): GroupNorm(32, 160, eps=1e-05, affine=True)
+        (5): ReLU()
+        (6): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (7): GroupNorm(32, 160, eps=1e-05, affine=True)
+        (8): ReLU()
+        (9): DFConv2d(
+          (offset): Conv2d(160, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=160, out_channels=160, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (10): GroupNorm(32, 160, eps=1e-05, affine=True)
+        (11): ReLU()
+      )
+      (share_tower): Sequential()
+      (bbox_pred): Conv2d(160, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (scales): ModuleList(
+        (0): Scale()
+        (1): Scale()
+        (2): Scale()
+        (3): Scale()
+        (4): Scale()
+      )
+      (agn_hm): Conv2d(160, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (roi_heads): GRiTROIHeads(
+    (text_decoder): GRiTTextDecoder(
+      (textual): TransformerDecoderTextualHead(
+        (object_feature_projection): Sequential(
+          (0): Linear(in_features=256, out_features=768, bias=True)
+          (1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        )
+        (embedding): WordAndPositionalEmbedding(
+          (words): Embedding(30522, 768)
+          (positions): Embedding(1024, 768)
+          (layer_norm): LayerNorm((768,), eps=1e-08, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (transformer): BertEncoderAsDecoder(
+          (encoder): BertEncoder(
+            (layer): ModuleList(
+              (0): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (1): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (2): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (3): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (4): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+              (5): BertLayer(
+                (attention): BertAttention(
+                  (self): BertSelfAttention(
+                    (query): Linear(in_features=768, out_features=768, bias=True)
+                    (key): Linear(in_features=768, out_features=768, bias=True)
+                    (value): Linear(in_features=768, out_features=768, bias=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                    (qk2attn): QK2Attention()
+                  )
+                  (output): BertSelfOutput(
+                    (dense): Linear(in_features=768, out_features=768, bias=True)
+                    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+                (intermediate): BertIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                )
+                (output): BertOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.1, inplace=False)
+                  (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                )
+              )
+            )
+          )
+        )
+        (output): Linear(in_features=768, out_features=30522, bias=True)
+      )
+      (loss): SmoothLabelCrossEntropyLoss(
+        (log_soft): LogSoftmax(dim=1)
+        (kl): KLDivLoss()
+      )
+    )
+    (summary_fusion_module): FusionModule(
+      (decoder): Decoder(
+        (multihead_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=1024, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=1024, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+      (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+    )
+    (caption_fusion_module): FusionModule(
+      (encoder): Encoder(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+    )
+    (relation_fusion_module): FusionModule(
+      (decoder): Decoder(
+        (multihead_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+        )
+        (linear1): Linear(in_features=256, out_features=1024, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=1024, out_features=256, bias=True)
+        (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+      (avg_pool): AdaptiveAvgPool1d(output_size=128)
+    )
+    (classifier): Classifier(
+      (adapter): Adapter(
+        (linear_1): Linear(in_features=32768, out_features=2048, bias=True)
+        (linear_2): Linear(in_features=2048, out_features=2048, bias=True)
+        (linear_3): Linear(in_features=2048, out_features=360, bias=True)
+        (relu): ReLU()
+      )
+      (loss_func): FocalLoss()
+    )
+  )
+  (asso_pooler): ROIPooler(
+    (level_poolers): ModuleList(
+      (0): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=0, aligned=True)
+    )
+  )
+  (asso_head): FCHead(
+    (fc1): Linear(in_features=7840, out_features=1024, bias=True)
+    (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+  )
+)

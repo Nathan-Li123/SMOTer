@@ -133,7 +133,8 @@ class GRiTROIHeads(CascadeROIHeads):
         if mode == 'summary':
             # feats->(n, 160, 256)
             feats = batch['feats']
-            fused_feat = self.summary_fusion_module(feats)
+            tracks = batch['pred_tracks']
+            fused_feat = self.summary_fusion_module(feats, tracks)
         elif mode == 'caption':
             tracks = batch['pred_tracks']
             fused_feat = self.caption_fusion_module(tracks)
@@ -149,13 +150,13 @@ class GRiTROIHeads(CascadeROIHeads):
         if mode == 'summary':
             if self.training:
                 assert len(batch['text']) == 1
-            feats = []
+            video_feats = []
             for frame_feat in batch['feats']:
                 feat = frame_feat['p3']
-                feats.append(feat)
-            feats = torch.cat(feats)
-            feats = F.adaptive_avg_pool2d(feats, (16, 16)).view(feats.shape[0], feats.shape[1], -1)
-            batch['feats'] = feats
+                video_feats.append(feat)
+            video_feats = torch.cat(video_feats)
+            video_feats = F.adaptive_avg_pool2d(video_feats, (16, 16)).view(video_feats.shape[0], video_feats.shape[1], -1)
+            batch['feats'] = video_feats
         elif mode == 'caption':
             if self.training:
                 text = batch['texts']

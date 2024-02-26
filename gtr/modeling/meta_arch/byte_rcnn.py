@@ -130,7 +130,8 @@ class BYTERCNN(CustomRCNN):
             transfered_pred_tracks, gt_ids = self._transfer_track_ids(gt_tracks=gt_tracks, pred_tracks=pred_tracks)
 
             summary_losses = self.roi_heads({
-                'feats': video_features, 'text': [video_info['summary']], 'mode': 'summary'
+                'feats': video_features, 'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
+                'text': [video_info['summary']], 'mode': 'summary'
             })
             caption_losses = self.roi_heads({
                 'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
@@ -342,7 +343,7 @@ class BYTERCNN(CustomRCNN):
         gt_tracks = self._check_gt_tracks(gt_tracks, video_info['caption'])
         transfered_pred_tracks, gt_ids = self._transfer_track_ids(gt_tracks=gt_tracks, pred_tracks=pred_tracks)
         
-        pred_summary = self.roi_heads({'feats': video_features, 'mode': 'summary'})
+        pred_summary = self.roi_heads({'feats': video_features, 'pred_tracks': transfered_pred_tracks, 'mode': 'summary'})
         gt_summary = video_info['summary']
         
         pred_captions = self.roi_heads({'pred_tracks': transfered_pred_tracks, 'mode': 'caption'})

@@ -12,6 +12,7 @@ class FusionModule(torch.nn.Module):
             self.avg_num = avg_num
             # self.resizer = nn.Linear(299, 192)
             self.decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
+            self.vt_decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
             self.norm = nn.LayerNorm(normalized_shape=256)
         elif mode == 'caption':
             # self.encoder = Encoder(d_model=256, nhead=8,  dropout=0.1)
@@ -29,17 +30,33 @@ class FusionModule(torch.nn.Module):
                 # frame_feature -> (1, 160, 256)
                 frame_feature = inputs[i].unsqueeze(0)
                 if int(frame_id) == 1:
-                    outputs = frame_feature
+                    video_outputs = frame_feature
                 elif int(frame_id) <= self.avg_num:
-                    outputs = outputs + frame_feature
+                    video_outputs = video_outputs + frame_feature
                 else:
                     if int(frame_id) == 6:
-                        outputs /= self.avg_num
-                        outputs = outputs.permute(1, 0, 2)
+                        video_outputs /= self.avg_num
+                        video_outputs = video_outputs.permute(1, 0, 2)
                     frame_feature = frame_feature.permute(1, 0, 2)
-                    outputs = self.decoder(outputs, frame_feature)
-                    outputs = self.norm(outputs)
-            outputs = [outputs.permute(1, 0, 2)]
+                    video_outputs = self.decoder(video_outputs, frame_feature)
+                    video_outputs = self.norm(video_outputs)
+            video_outputs = video_outputs.permute(1, 0, 2)
+
+            track_outputs = []
+            for track in inputs:
+                track_feats = []
+                for frame_id in track.keys():
+                    feat = track[frame_id]['feat'].cuda().view(4, 256)
+                    track_feats.append(feat)
+                track_feats = torch.cat(track_feats).unsqueeze(0)
+                track_outputs.append(track_feats)
+            
+            for track_feat in track_feats:
+                video_outputs = video_outputs.permute(1, 0, 2)
+                track_feat = track_feat.permute(1, 0, 2)
+                video_outputs = self.vt_decoder(video_outputs, track_feat)
+                video_outputs = video_outputs.permute(1, 0, 2)
+            outputs = [video_outputs]
         elif self.mode == 'caption':
             outputs = []
             for track in inputs:

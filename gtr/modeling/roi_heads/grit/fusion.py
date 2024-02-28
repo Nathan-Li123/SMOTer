@@ -23,7 +23,7 @@ class FusionModule(torch.nn.Module):
         else:
             raise ValueError('Unkonwn mode %s.' % self.mode)
 
-    def forward(self, inputs):
+    def forward(self, inputs, extra=None):
         if self.mode == 'summary':
             for i in range(inputs.shape[0]):
                 frame_id = i + 1
@@ -43,7 +43,7 @@ class FusionModule(torch.nn.Module):
             video_outputs = video_outputs.permute(1, 0, 2)
 
             track_outputs = []
-            for track in inputs:
+            for track in extra:
                 track_feats = []
                 for frame_id in track.keys():
                     feat = track[frame_id]['feat'].cuda().view(4, 256)
@@ -51,7 +51,7 @@ class FusionModule(torch.nn.Module):
                 track_feats = torch.cat(track_feats).unsqueeze(0)
                 track_outputs.append(track_feats)
             
-            for track_feat in track_feats:
+            for track_feat in track_outputs:
                 video_outputs = video_outputs.permute(1, 0, 2)
                 track_feat = track_feat.permute(1, 0, 2)
                 video_outputs = self.vt_decoder(video_outputs, track_feat)

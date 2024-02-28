@@ -30,8 +30,8 @@ SOLVER:
     CLIP_VALUE: 0.1
     NORM_TYPE: 2.0
   BACKBONE_MULTIPLIER: 0.1
-  CUSTOM_MULTIPLIER: 2.0
-  CUSTOM_MULTIPLIER_NAME: ["summary_text_decoder", "classifier"]
+  # CUSTOM_MULTIPLIER: 2.0
+  # CUSTOM_MULTIPLIER_NAME: ["summary_text_decoder", "classifier"]
 INPUT:
   FORMAT: RGB
   CUSTOM_AUG: EfficientDetResizeCrop

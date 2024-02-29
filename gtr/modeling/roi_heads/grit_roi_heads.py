@@ -106,9 +106,7 @@ class GRiTROIHeads(CascadeROIHeads):
         self.tokenizer = tokenizer
         self.task_begin_tokens = task_begin_tokens
         self.get_target_text_tokens = LoadTextTokens(tokenizer, max_text_len=40, padding='do_not_pad')
-        self.summary_fusion_module = FusionModule('summary')
-        self.caption_fusion_module = FusionModule('caption')
-        self.relation_fusion_module = FusionModule('relation')
+        self.fusion_module = FusionModule()
         pretrained_dict = torch.load('weights/grit_b_densecap_objectdet.pth')
         model_dict = {}
         for k, v in pretrained_dict['model'].items():
@@ -134,13 +132,13 @@ class GRiTROIHeads(CascadeROIHeads):
             # feats->(n, 160, 256)
             feats = batch['feats']
             tracks = batch['pred_tracks']
-            fused_feat = self.summary_fusion_module(feats, tracks)
+            fused_feat = self.fusion_module(feats, tracks, mode='summary')
         elif mode == 'caption':
             tracks = batch['pred_tracks']
-            fused_feat = self.caption_fusion_module(tracks)
+            fused_feat = self.fusion_module(tracks, mode='caption')
         elif mode == 'relation':
             feats = batch['feats']
-            fused_feat = self.relation_fusion_module(feats)
+            fused_feat = self.fusion_module(feats, mode='relation')
         else:
             raise ValueError('Unkown mode: %s' % mode)
         return fused_feat

@@ -7,24 +7,35 @@ from typing import Optional
 class FusionModule(torch.nn.Module):
     def __init__(self, mode='summary', avg_num=5, min_track_len=20, max_track_len=256) -> None:
         super().__init__()
-        self.mode = mode
-        if mode == 'summary':
-            self.avg_num = avg_num
-            # self.resizer = nn.Linear(299, 192)
-            self.decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
-            self.vt_decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
-            self.norm = nn.LayerNorm(normalized_shape=256)
-        elif mode == 'caption':
-            # self.encoder = Encoder(d_model=256, nhead=8,  dropout=0.1)
-            pass
-        elif mode == 'relation':
-            self.decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
-            self.avg_pool = torch.nn.AdaptiveAvgPool1d(128)
-        else:
-            raise ValueError('Unkonwn mode %s.' % self.mode)
+        # 融合图像特征的decoder
+        self.vv_decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
+        # 融合视频特征和轨迹特征的decoder
+        self.vt_decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
+        # 融合两条轨迹特征的decoder
+        self.tt_decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
+        # 轨迹内部融合encoder
+        self.encoder = Encoder(d_model=256, nhead=8)
 
-    def forward(self, inputs, extra=None):
-        if self.mode == 'summary':
+        self.avg_num = avg_num
+        self.avg_pool = torch.nn.AdaptiveAvgPool1d(128)
+        
+        # if mode == 'summary':
+        #     self.avg_num = avg_num
+        #     # self.resizer = nn.Linear(299, 192)
+        #     self.decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
+        #     self.vt_decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
+        #     self.norm = nn.LayerNorm(normalized_shape=256)
+        # elif mode == 'caption':
+        #     # self.encoder = Encoder(d_model=256, nhead=8,  dropout=0.1)
+        #     pass
+        # elif mode == 'relation':
+        #     self.decoder = Decoder(d_model=256, dim_kv=256, nhead=8, dim_feedforward=1024, dropout=0.1, activation='relu')
+        #     self.avg_pool = torch.nn.AdaptiveAvgPool1d(128)
+        # else:
+        #     raise ValueError('Unkonwn mode %s.' % mode)
+
+    def forward(self, inputs, extra=None, mode=None):
+        if mode == 'summary':
             for i in range(inputs.shape[0]):
                 frame_id = i + 1
                 # frame_feature -> (1, 160, 256)
@@ -38,8 +49,7 @@ class FusionModule(torch.nn.Module):
                         video_outputs /= self.avg_num
                         video_outputs = video_outputs.permute(1, 0, 2)
                     frame_feature = frame_feature.permute(1, 0, 2)
-                    video_outputs = self.decoder(video_outputs, frame_feature)
-                    video_outputs = self.norm(video_outputs)
+                    video_outputs = self.vv_decoder(video_outputs, frame_feature)
             video_outputs = video_outputs.permute(1, 0, 2)
 
             track_outputs = []
@@ -54,10 +64,11 @@ class FusionModule(torch.nn.Module):
             for track_feat in track_outputs:
                 video_outputs = video_outputs.permute(1, 0, 2)
                 track_feat = track_feat.permute(1, 0, 2)
+                track_feat = self.encoder(track_feat)
                 video_outputs = self.vt_decoder(video_outputs, track_feat)
                 video_outputs = video_outputs.permute(1, 0, 2)
             outputs = [video_outputs]
-        elif self.mode == 'caption':
+        elif mode == 'caption':
             outputs = []
             for track in inputs:
                 track_feats = []
@@ -65,8 +76,11 @@ class FusionModule(torch.nn.Module):
                     feat = track[frame_id]['feat'].cuda().view(4, 256)
                     track_feats.append(feat)
                 track_feats = torch.cat(track_feats).unsqueeze(0)
+                track_feats = track_feats.permute(1, 0, 2)
+                track_feats = self.encoder(track_feats)
+                track_feats = track_feats.permute(1, 0, 2)
                 outputs.append(track_feats)
-        elif self.mode == 'relation':
+        elif mode == 'relation':
             outputs = []
             for feats in inputs:
                 source_track = feats['source']
@@ -84,14 +98,16 @@ class FusionModule(torch.nn.Module):
                 
                 source_feat = source_feat.permute(1, 0, 2)
                 target_feat = target_feat.permute(1, 0, 2)
-                fused_feat = self.decoder(source_feat, target_feat)
+                source_feat = self.encoder(source_feat)
+                target_feat = self.encoder(target_feat)
+                fused_feat = self.tt_decoder(source_feat, target_feat)
                 fused_feat = fused_feat.permute(1, 0, 2)
                 fused_feat = self.avg_pool(fused_feat.transpose(1, 2))
                 
                 outputs.append(fused_feat)
             outputs = torch.stack(outputs)
         else:
-            raise ValueError('Unkonwn mode %s.' % self.mode)
+            raise ValueError('Unkonwn mode %s.' % mode)
         return outputs
 
 

@@ -112,3 +112,24 @@ gtr.tracking.trackeval.utils.TrackEvalException: Ground-truth has the same ID mo
 
 
 
+MotChallenge2DBox
+pred
+Traceback (most recent call last):
+  File "/data2/SMVU/GTR/gtr/tracking/trackeval/eval.py", line 86, in evaluate
+    res[curr_seq] = eval_sequence(curr_seq, dataset, tracker, class_list, metrics_list,
+  File "/data2/SMVU/GTR/gtr/tracking/trackeval/_timing.py", line 16, in wrap
+    result = f(*args, **kw)
+  File "/data2/SMVU/GTR/gtr/tracking/trackeval/eval.py", line 191, in eval_sequence
+    data = dataset.get_preprocessed_seq_data(raw_data, cls)
+  File "/data2/SMVU/GTR/gtr/tracking/trackeval/_timing.py", line 16, in wrap
+    result = f(*args, **kw)
+  File "/data2/SMVU/GTR/gtr/tracking/trackeval/datasets/mot_challenge_2d_box.py", line 335, in get_preprocessed_seq_data
+    self._check_unique_ids(raw_data)
+  File "/data2/SMVU/GTR/gtr/tracking/trackeval/datasets/_base_dataset.py", line 299, in _check_unique_ids
+    raise TrackEvalException(exc_str)
+gtr.tracking.trackeval.utils.TrackEvalException: Tracker predicts the same ID more than once in a single timestep (seq: _Uncategoried/2690cK9cAsY_0, frame: 4, ids: 1 2)
+
+
+
+
+

@@ -3,6 +3,7 @@ from detectron2.layers.shape_spec import ShapeSpec
 from detectron2.modeling.poolers import ROIPooler
 import torch
 import random
+import numpy as np
 from scipy.optimize import linear_sum_assignment
 import torch.nn.functional as F
 
@@ -16,6 +17,7 @@ from gtr.modeling.roi_heads.grit_roi_heads import get_relation_labels
 from .custom_rcnn import CustomRCNN
 from ..roi_heads.custom_fast_rcnn import custom_fast_rcnn_inference
 from ..tracker.byte_tracker import BYTETracker
+from ..tracker.ocsort import OCSort
 
 
 @META_ARCH_REGISTRY.register()
@@ -307,6 +309,7 @@ class BYTERCNN(CustomRCNN):
             instances_wo_id = self._get_insts_with_feats(proposals=proposals, features=features)            
             instances.extend([x for x in instances_wo_id])
             inst = instances[frame_id]
+
             dets = torch.cat([
                 inst.pred_boxes.tensor, 
                 inst.scores[:, None]], dim=1).cpu()
@@ -331,11 +334,62 @@ class BYTERCNN(CustomRCNN):
         return pred_instances, video_features
 
 
+    @torch.no_grad()
+    def oc_inferene_tracks(self, batched_inputs):
+        if self.training:
+            self.backbone.eval()
+            self.proposal_generator.eval()
+        local_tracker = OCSort(det_thresh=0.2, iou_threshold=0.3, delta_t=3)
+        video_len = len(batched_inputs)
+        instances = []
+        ret_instances = []
+        video_features = []
+        for frame_id in range(video_len):
+            # instances_wo_id = self.inference(
+            #     batched_inputs[frame_id: frame_id + 1], 
+            #     do_postprocess=False)
+            images = self.preprocess_image(batched_inputs[frame_id: frame_id + 1])
+            features = self.backbone(images.tensor)
+            video_features.append(features)
+            proposals, _ = self.proposal_generator(images, features, None)
+            instances_wo_id = self._get_insts_with_feats(proposals=proposals, features=features)            
+            instances.extend([x for x in instances_wo_id])
+            inst = instances[frame_id]
+
+            dets = inst.pred_boxes.tensor.cpu().numpy()
+            scores = inst.scores.cpu().numpy()
+            cates = np.ones_like(scores)
+            dets[:, 2:] += dets[:, :2]
+
+            tracks = local_tracker.update_public_with_inds(dets, cates, scores)
+            track_inds = [int(track_ind) for track_ind in tracks[:, 7]]
+            track_ids = [int(track_id) for track_id in tracks[:, 4]]
+            track_inds = list(set(track_inds))
+            track_ids = list(set(track_ids))
+            assert len(track_inds) == len(track_ids)
+            ret_inst = inst[track_inds]
+            ret_inst.track_ids = ret_inst.pred_classes.new_tensor(track_ids)
+            ret_instances.append(ret_inst)
+        instances = ret_instances
+
+        if self.min_track_len > 0:
+            instances = self._remove_short_track(instances)
+        pred_instances = CustomRCNN._postprocess(
+                instances, batched_inputs, [
+                    (0, 0) for _ in range(len(batched_inputs))],
+                not_clamp_box=self.not_clamp_box)
+        if self.training:
+            self.backbone.train()
+            self.proposal_generator.train()
+        return pred_instances, video_features
+
+
     def local_tracker_inference(self, batched_inputs):
         video_info = batched_inputs[-1]
         batched_inputs = batched_inputs[:-1]
         # get gt for evalutaions only
         gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
+        # pred_instances, video_features = self.inferene_tracks(batched_inputs)
         pred_instances, video_features = self.inferene_tracks(batched_inputs)
         # track finished
         pred_tracks = self._post_process_tracks(pred_instances, gt=False)

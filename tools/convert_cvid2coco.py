@@ -4,7 +4,7 @@ import tqdm
 
 
 DATA_PATH = '/data3/InsCap/imgs'
-OUT_PATH = 'datasets/cvid/annotations/'
+OUT_PATH = 'datasets/new_cvid/annotations/'
 SPLITS = ['train', 'val']
 ADD_TEXT = True
 
@@ -12,13 +12,13 @@ if __name__ == '__main__':
     if not os.path.exists(OUT_PATH):
         os.mkdir(OUT_PATH)
     if ADD_TEXT:
-        with open('datasets/cvid/video_summary.json', 'r') as f:
+        with open('datasets/new_cvid/video_summary.json', 'r') as f:
             summary_dict = json.load(f)
-        with open('datasets/cvid/instance_caption.json', 'r') as f:
+        with open('datasets/new_cvid/instance_caption.json', 'r') as f:
             caption_dict = json.load(f)
-        with open('datasets/cvid/relation.json', 'r') as f:
+        with open('datasets/new_cvid/relation.json', 'r') as f:
             relation_dict = json.load(f)
-    seqmap = open('datasets/cvid/seqmaps/trainval.txt', 'w')
+    seqmap = open('datasets/new_cvid/seqmaps/trainval.txt', 'w')
     seqmap.write('name\n')
     for split in SPLITS:
         out = {'images': [], 'annotations': [], 'categories': [{'id': 1, 'name': 'person'}], 'videos': []}
@@ -29,7 +29,7 @@ if __name__ == '__main__':
         for cate_dir in tqdm.tqdm(cate_dirs, desc=split + ' set'):
             cate_dir_path = os.path.join(DATA_PATH, cate_dir)
             seq_dirs = os.listdir(cate_dir_path)
-            for seq_dir in seq_dirs:
+            for idx, seq_dir in enumerate(seq_dirs):
                 seq_dir_path = os.path.join(cate_dir_path, seq_dir)
                 seq_name = cate_dir + '/' + seq_dir
                 if ADD_TEXT:
@@ -39,9 +39,9 @@ if __name__ == '__main__':
                     inst_caption = caption_dict[seq_name]
                     inter_relation = relation_dict[seq_name]
                 video_cnt += 1
-                if split == 'train' and video_cnt % 6 == 0:
+                if split == 'train' and idx >= int(len(seq_dirs) * 0.7):
                     continue
-                if split == 'val' and video_cnt % 6 != 0:
+                if split == 'val' and idx < int(len(seq_dirs) * 0.7):
                     continue
                 if ADD_TEXT:
                     out['videos'].append({'id': video_cnt, 'file_name': seq_name,\

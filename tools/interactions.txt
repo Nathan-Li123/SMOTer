@@ -1,0 +1,1005 @@
+\noindent
+\textbf{accept.v.01: }\emph{consider or hold as true}
+
+\noindent
+\textbf{accept.v.02: }\emph{receive willingly something given or offered}
+
+\noindent
+\textbf{accompany.v.02: }\emph{go or travel along with}
+
+\noindent
+\textbf{adjust.v.01: }\emph{alter or regulate so as to achieve accuracy or conform to a standard}
+
+\noindent
+\textbf{admire.v.01: }\emph{feel admiration for}
+
+\noindent
+\textbf{agree.v.01: }\emph{be in accord; be in agreement}
+
+\noindent
+\textbf{agree.v.02: }\emph{consent or assent to a condition, or agree to do something}
+
+\noindent
+\textbf{aim.v.01: }\emph{point or cause to go (blows, weapons, or objects such as photographic equipment) towards}
+
+\noindent
+\textbf{amuse.v.02: }\emph{make (somebody) laugh}
+
+\noindent
+\textbf{anger.v.01: }\emph{make angry}
+
+\noindent
+\textbf{answer.v.03: }\emph{give the correct answer or solution to}
+
+\noindent
+\textbf{applaud.v.01: }\emph{clap one's hands or shout after performances to indicate approval}
+
+\noindent
+\textbf{appreciate.v.01: }\emph{recognize with gratitude; be grateful for}
+
+\noindent
+\textbf{approach.v.01: }\emph{move towards}
+
+\noindent
+\textbf{arise.v.03: }\emph{rise to one's feet}
+
+\noindent
+\textbf{attack.v.01: }\emph{launch an attack or assault on; begin hostilities or start warfare with}
+
+\noindent
+\textbf{bandage.v.02: }\emph{dress by covering or binding}
+
+\noindent
+\textbf{baptism.n.01: }\emph{a Christian sacrament signifying spiritual cleansing and rebirth}
+
+\noindent
+\textbf{barber.v.01: }\emph{perform the services of a barber: cut the hair and/or beard of}
+
+\noindent
+\textbf{bark.v.01: }\emph{speak in an unfriendly tone}
+
+\noindent
+\textbf{barricade.v.01: }\emph{render unsuitable for passage}
+
+\noindent
+\textbf{beat.v.02: }\emph{give a beating to; subject to a beating, either as a punishment or as an act of aggression}
+
+\noindent
+\textbf{beat.v.03: }\emph{hit repeatedly}
+
+\noindent
+\textbf{beckon.v.01: }\emph{signal with the hands or nod}
+
+\noindent
+\textbf{beckon.v.03: }\emph{summon with a wave, nod, or some other gesture}
+
+\noindent
+\textbf{bite.v.01: }\emph{to grip, cut off, or tear with or as if with the teeth or jaws}
+
+\noindent
+\textbf{bite.v.02: }\emph{cause a sharp or stinging pain or discomfort}
+
+\noindent
+\textbf{blow.v.06: }\emph{shape by blowing}
+
+\noindent
+\textbf{box.v.02: }\emph{hit with the fist}
+
+\noindent
+\textbf{braid.v.03: }\emph{form or weave into a braid or braids}
+
+\noindent
+\textbf{breathe.v.01: }\emph{draw air into, and expel out of, the lungs}
+
+\noindent
+\textbf{brush.v.01: }\emph{rub with a brush, or as if with a brush}
+
+\noindent
+\textbf{brush.v.03: }\emph{clean with a brush}
+
+\noindent
+\textbf{bubble.v.01: }\emph{form, produce, or emit bubbles}
+
+\noindent
+\textbf{bubble.v.04: }\emph{cause to form bubbles}
+
+\noindent
+\textbf{buy.v.01: }\emph{obtain by purchase; acquire by means of a financial transaction}
+
+\noindent
+\textbf{call.v.22: }\emph{lure by imitating the characteristic call of an animal}
+
+\noindent
+\textbf{caress.v.01: }\emph{touch or stroke lightly in a loving or endearing manner}
+
+\noindent
+\textbf{catch.v.01: }\emph{discover or come upon accidentally, suddenly, or unexpectedly; catch somebody doing something or in a certain state}
+
+\noindent
+\textbf{catch.v.04: }\emph{take hold of so as to seize or restrain or stop the motion of}
+
+\noindent
+\textbf{change_state.v.01: }\emph{undergo a transformation or a change of position or action}
+
+\noindent
+\textbf{chase.v.01: }\emph{go after with the intent to catch}
+
+\noindent
+\textbf{check.v.01: }\emph{examine so as to determine accuracy, quality, or condition}
+
+\noindent
+\textbf{check.v.02: }\emph{make an examination or investigation}
+
+\noindent
+\textbf{check.v.06: }\emph{put a check mark on or near or next to}
+
+\noindent
+\textbf{cheer.v.02: }\emph{show approval or good wishes by shouting}
+
+\noindent
+\textbf{cheer.v.05: }\emph{spur on or encourage especially by cheers and shouts}
+
+\noindent
+\textbf{circle.v.01: }\emph{travel around something}
+
+\noindent
+\textbf{circle.v.02: }\emph{move in circles}
+
+\noindent
+\textbf{clamp.v.01: }\emph{fasten or fix with a clamp}
+
+\noindent
+\textbf{clap.v.01: }\emph{put quickly or forcibly}
+
+\noindent
+\textbf{clap.v.02: }\emph{cause to strike the air in flight}
+
+\noindent
+\textbf{clap.v.04: }\emph{clap one's hands together}
+
+\noindent
+\textbf{clap.v.06: }\emph{strike with the flat of the hand; usually in a friendly way, as in encouragement or greeting}
+
+\noindent
+\textbf{clean.v.01: }\emph{make clean by removing dirt, filth, or unwanted substances from}
+
+\noindent
+\textbf{clip.v.03: }\emph{attach with a clip}
+
+\noindent
+\textbf{close.v.10: }\emph{change one's body stance so that the forward shoulder and foot are closer to the intended point of impact}
+
+\noindent
+\textbf{collaborate.v.01: }\emph{work together on a common enterprise of project}
+
+\noindent
+\textbf{collide.v.02: }\emph{cause to collide}
+
+\noindent
+\textbf{collision: }
+
+\noindent
+\textbf{comb.v.01: }\emph{straighten with a comb}
+
+\noindent
+\textbf{command.n.02: }\emph{a military unit or region under the control of a single officer}
+
+\noindent
+\textbf{compel.v.01: }\emph{force somebody to do something}
+
+\noindent
+\textbf{compete.v.01: }\emph{compete for something; engage in a contest; measure oneself against others}
+
+\noindent
+\textbf{complain.v.01: }\emph{express complaints, discontent, displeasure, or unhappiness}
+
+\noindent
+\textbf{comply.v.0: }\emph{act in accordance with someone's rules, commands, or wishes}
+
+\noindent
+\textbf{comply.v.01: }\emph{act in accordance with someone's rules, commands, or wishes}
+
+\noindent
+\textbf{compress.v.02: }\emph{squeeze or press together}
+
+\noindent
+\textbf{congratulate.v.02: }\emph{express congratulations}
+
+\noindent
+\textbf{converse.n.01: }\emph{a proposition obtained by conversion}
+
+\noindent
+\textbf{converse.v.01: }\emph{carry on a conversation}
+
+\noindent
+\textbf{cooperation: }
+
+\noindent
+\textbf{cover.v.01: }\emph{provide with a covering or cause to be covered}
+
+\noindent
+\textbf{cover.v.19: }\emph{spread over a surface to conceal or protect}
+
+\noindent
+\textbf{criticize.v.01: }\emph{find fault with; express criticism of; point out real or perceived flaws}
+
+\noindent
+\textbf{cry.v.01: }\emph{utter a sudden loud cry}
+
+\noindent
+\textbf{cry.v.02: }\emph{shed tears because of sadness, rage, or pain}
+
+\noindent
+\textbf{curl.v.01: }\emph{form a curl, curve, or kink}
+
+\noindent
+\textbf{cut.v.07: }\emph{style and tailor in a certain fashion}
+
+\noindent
+\textbf{dab.v.02: }\emph{hit lightly}
+
+\noindent
+\textbf{dance.v.01: }\emph{move in a graceful and rhythmical way}
+
+\noindent
+\textbf{dance.v.03: }\emph{skip, leap, or move up and down or sideways}
+
+\noindent
+\textbf{daub.v.03: }\emph{cover (a surface) by smearing (a substance) over it}
+
+\noindent
+\textbf{decant.v.01: }\emph{pour out}
+
+\noindent
+\textbf{defense: }
+
+\noindent
+\textbf{defy.v.02: }\emph{elude, especially in a baffling way}
+
+\noindent
+\textbf{detach.v.01: }\emph{cause to become detached or separated; take off}
+
+\noindent
+\textbf{die.v.10: }\emph{disappear or come to an end}
+
+\noindent
+\textbf{direct.v.09: }\emph{give directions to; point somebody into a certain direction}
+
+\noindent
+\textbf{disinfect.v.01: }\emph{destroy microorganisms or pathogens by cleansing}
+
+\noindent
+\textbf{dodge.v.01: }\emph{make a sudden movement in a new direction so as to avoid}
+
+\noindent
+\textbf{drag.v.01: }\emph{pull, as against a resistance}
+
+\noindent
+\textbf{draw.v.05: }\emph{bring, take, or pull out of a container or from under a cover}
+
+\noindent
+\textbf{dress.v.01: }\emph{put on clothes}
+
+\noindent
+\textbf{dress.v.02: }\emph{provide with clothes or put clothes on}
+
+\noindent
+\textbf{dress.v.16: }\emph{arrange attractively}
+
+\noindent
+\textbf{drink.v.01: }\emph{take in liquids}
+
+\noindent
+\textbf{drip.v.01: }\emph{fall in drops}
+
+\noindent
+\textbf{drop.v.01: }\emph{let fall to the ground}
+
+\noindent
+\textbf{drum.v.01: }\emph{make a rhythmic sound}
+
+\noindent
+\textbf{dry.v.01: }\emph{remove the moisture from and make dry}
+
+\noindent
+\textbf{eat.v.01: }\emph{take in solid food}
+
+\noindent
+\textbf{elude.v.01: }\emph{escape, either physically or mentally}
+
+\noindent
+\textbf{embrace.v.02: }\emph{squeeze (someone) tightly in your arms, usually with fondness}
+
+\noindent
+\textbf{escape.v.01: }\emph{run away from confinement}
+
+\noindent
+\textbf{examine.v.02: }\emph{observe, check out, and look over carefully or inspect}
+
+\noindent
+\textbf{exchange.v.01: }\emph{give to, and receive from, one another}
+
+\noindent
+\textbf{explain.v.01: }\emph{make plain and comprehensible}
+
+\noindent
+\textbf{facial.n.02: }\emph{care for the face that usually involves cleansing and massage and the application of cosmetic creams}
+
+\noindent
+\textbf{feed.v.01: }\emph{provide as food}
+
+\noindent
+\textbf{feed.v.02: }\emph{give food to}
+
+\noindent
+\textbf{feed.v.06: }\emph{take in food; used of animals only}
+
+\noindent
+\textbf{feel.v.03: }\emph{perceive by a physical sensation, e.g., coming from the skin or muscles}
+
+\noindent
+\textbf{fight.v.02: }\emph{fight against or resist strongly}
+
+\noindent
+\textbf{finger.v.01: }\emph{feel or handle with the fingers}
+
+\noindent
+\textbf{flee.v.01: }\emph{run away quickly}
+
+\noindent
+\textbf{follow.v.01: }\emph{to travel behind, go after, come after}
+
+\noindent
+\textbf{free.v.01: }\emph{grant freedom to; free from confinement}
+
+\noindent
+\textbf{frighten.v.01: }\emph{cause fear in}
+
+\noindent
+\textbf{frisk.v.02: }\emph{search as for concealed weapons by running the hands rapidly over the clothing and through the pockets}
+
+\noindent
+\textbf{give.v.01: }\emph{cause to have, in the abstract sense or physical sense}
+
+\noindent
+\textbf{give.v.03: }\emph{transfer possession of something concrete or abstract to somebody}
+
+\noindent
+\textbf{give.v.07: }\emph{convey or communicate; of a smile, a look, a physical gesture}
+
+\noindent
+\textbf{give.v.08: }\emph{give as a present; make a gift of}
+
+\noindent
+\textbf{give.v.14: }\emph{leave with; give temporarily}
+
+\noindent
+\textbf{give.v.28: }\emph{execute and deliver}
+
+\noindent
+\textbf{glance.v.01: }\emph{throw a glance at; take a brief look at}
+
+\noindent
+\textbf{glue.v.01: }\emph{join or attach with or as if with glue}
+
+\noindent
+\textbf{grasp.v.01: }\emph{hold firmly}
+
+\noindent
+\textbf{grip.v.01: }\emph{hold fast or firmly}
+
+\noindent
+\textbf{guffaw.v.01: }\emph{laugh boisterously}
+
+\noindent
+\textbf{hammer.v.01: }\emph{beat with or as if with a hammer}
+
+\noindent
+\textbf{handshake.n.01: }\emph{grasping and shaking a person's hand (as to acknowledge an introduction or to agree on a contract)}
+
+\noindent
+\textbf{hash_out.v.0: }\emph{speak with others about (something); talk (something) over in detail; have a discussion}
+
+\noindent
+\textbf{hash_out.v.01: }\emph{speak with others about (something); talk (something) over in detail; have a discussion}
+
+\noindent
+\textbf{headshake: }
+
+\noindent
+\textbf{help.v.01: }\emph{give help or assistance; be of service}
+
+\noindent
+\textbf{hit.v.02: }\emph{hit against; come into sudden contact with}
+
+\noindent
+\textbf{hit.v.03: }\emph{deal a blow to, either with the hand or with an instrument}
+
+\noindent
+\textbf{hold.v.0: }\emph{keep from exhaling or expelling}
+
+\noindent
+\textbf{hold.v.01: }\emph{keep in a certain state, position, or activity; e.g.,}
+
+\noindent
+\textbf{hold.v.02: }\emph{have or hold in one's hands or grip}
+
+\noindent
+\textbf{hold.v.10: }\emph{be the physical support of; carry the weight of}
+
+\noindent
+\textbf{hold.v.13: }\emph{remain in a certain state, position, or condition}
+
+\noindent
+\textbf{hold.v.14: }\emph{support or hold in a certain manner}
+
+\noindent
+\textbf{hook.v.11: }\emph{entice and trap}
+
+\noindent
+\textbf{imitate.v.01: }\emph{reproduce someone's behavior or looks}
+
+\noindent
+\textbf{imitate.v.02: }\emph{appear like, as in behavior or appearance}
+
+\noindent
+\textbf{indicate.v.02: }\emph{indicate a place, direction, person, or thing; either spatially or figuratively}
+
+\noindent
+\textbf{insert.v.01: }\emph{put or introduce into something}
+
+\noindent
+\textbf{insert.v.02: }\emph{introduce}
+
+\noindent
+\textbf{interview.v.01: }\emph{conduct an interview in television, newspaper, and radio reporting}
+
+\noindent
+\textbf{invite.v.04: }\emph{ask someone in a friendly way to do something}
+
+\noindent
+\textbf{invite.v.05: }\emph{have as a guest}
+
+\noindent
+\textbf{judge.v.01: }\emph{determine the result of (a competition)}
+
+\noindent
+\textbf{jump.v.01: }\emph{move forward by leaps and bounds}
+
+\noindent
+\textbf{keep.v.01: }\emph{keep in a certain state, position, or activity; e.g.,}
+
+\noindent
+\textbf{kid.v.01: }\emph{tell false information to for fun}
+
+\noindent
+\textbf{kiss.v.02: }\emph{touch lightly or gently}
+
+\noindent
+\textbf{kneel.v.01: }\emph{rest one's weight on one's knees}
+
+\noindent
+\textbf{knock.v.01: }\emph{deliver a sharp blow or push :}
+
+\noindent
+\textbf{laugh.v.01: }\emph{produce laughter}
+
+\noindent
+\textbf{lead.v.01: }\emph{take somebody somewhere}
+
+\noindent
+\textbf{lean.v.01: }\emph{to incline or bend from a vertical position}
+
+\noindent
+\textbf{lean_on.v.01: }\emph{rest on for support}
+
+\noindent
+\textbf{leave.v.01: }\emph{go away from a place}
+
+\noindent
+\textbf{let_go_of.v.01: }\emph{release, as from one's grip}
+
+\noindent
+\textbf{lick.v.02: }\emph{pass the tongue over}
+
+\noindent
+\textbf{lie.v.01: }\emph{be located or situated somewhere; occupy a certain position}
+
+\noindent
+\textbf{lie.v.02: }\emph{be lying, be prostrate; be in a horizontal position}
+
+\noindent
+\textbf{lift.v.0: }\emph{perform cosmetic surgery on someone's face}
+
+\noindent
+\textbf{lift.v.02: }\emph{take hold of something and move it to a different location}
+
+\noindent
+\textbf{lift.v.03: }\emph{move upwards}
+
+\noindent
+\textbf{light.v.01: }\emph{make lighter or brighter}
+
+\noindent
+\textbf{listen.v.01: }\emph{hear with intention}
+
+\noindent
+\textbf{listen.v.02: }\emph{listen and pay attention}
+
+\noindent
+\textbf{look.v.01: }\emph{perceive with attention; direct one's gaze towards}
+
+\noindent
+\textbf{look.v.1: }\emph{perceive with attention; direct one's gaze towards}
+
+\noindent
+\textbf{lower.v.01: }\emph{move something or somebody to a lower position}
+
+\noindent
+\textbf{manicure.v.01: }\emph{trim carefully and neatly}
+
+\noindent
+\textbf{manipulate.v.05: }\emph{control (others or oneself) or influence skillfully, usually to one's advantage}
+
+\noindent
+\textbf{massage.v.0: }\emph{give a massage to}
+
+\noindent
+\textbf{massage.v.01: }\emph{manually manipulate (someone's body), usually for medicinal or relaxation purposes}
+
+\noindent
+\textbf{massage.v.02: }\emph{give a massage to}
+
+\noindent
+\textbf{measure.v.01: }\emph{determine the measurements of something or somebody, take measurements of}
+
+\noindent
+\textbf{meet.v.10: }\emph{contend against an opponent in a sport, game, or battle}
+
+\noindent
+\textbf{model.v.03: }\emph{assume a posture as for artistic purposes}
+
+\noindent
+\textbf{moisten.v.01: }\emph{make moist}
+
+\noindent
+\textbf{moisture.n.01: }\emph{wetness caused by water}
+
+\noindent
+\textbf{money.n.01: }\emph{the most common medium of exchange; functions as legal tender}
+
+\noindent
+\textbf{move.v.02: }\emph{cause to move or shift into a new position or place, both in a concrete and in an abstract sense}
+
+\noindent
+\textbf{move.v.03: }\emph{move so as to change position, perform a nontranslational motion}
+
+\noindent
+\textbf{nod.v.01: }\emph{express or signify by nodding}
+
+\noindent
+\textbf{nod.v.02: }\emph{lower and raise the head, as to indicate assent or agreement or confirmation}
+
+\noindent
+\textbf{observe.v.04: }\emph{watch attentively}
+
+\noindent
+\textbf{obstruct.v.01: }\emph{hinder or prevent the progress or accomplishment of}
+
+\noindent
+\textbf{open.v.01: }\emph{cause to open or to become open}
+
+\noindent
+\textbf{order.v.0: }\emph{assign a rank or rating to}
+
+\noindent
+\textbf{order.v.01: }\emph{give instructions to or direct somebody to do something with authority}
+
+\noindent
+\textbf{orient.v.02: }\emph{determine one's position with reference to another point}
+
+\noindent
+\textbf{parry.v.01: }\emph{impede the movement of (an opponent or a ball)}
+
+\noindent
+\textbf{parry.v.02: }\emph{avoid or try to avoid fulfilling, answering, or performing (duties, questions, or issues)}
+
+\noindent
+\textbf{pass.v.01: }\emph{go across or through}
+
+\noindent
+\textbf{pass.v.05: }\emph{place into the hands or custody of}
+
+\noindent
+\textbf{pass.v.20: }\emph{throw (a ball) to another player}
+
+\noindent
+\textbf{paste.v.03: }\emph{cover the surface of}
+
+\noindent
+\textbf{pay.v.01: }\emph{give money, usually in exchange for goods or services}
+
+\noindent
+\textbf{peck.v.01: }\emph{hit lightly with a picking motion}
+
+\noindent
+\textbf{photograph.v.01: }\emph{record on photographic film}
+
+\noindent
+\textbf{pinch.v.01: }\emph{squeeze tightly between the fingers}
+
+\noindent
+\textbf{play.v.01: }\emph{participate in games or sport}
+
+\noindent
+\textbf{play.v.03: }\emph{play on an instrument}
+
+\noindent
+\textbf{point.v.10: }\emph{be positionable in a specified manner}
+
+\noindent
+\textbf{polish.v.02: }\emph{improve or perfect by pruning or polishing}
+
+\noindent
+\textbf{pour.v.01: }\emph{cause to run}
+
+\noindent
+\textbf{preen.v.02: }\emph{pride or congratulate (oneself) for an achievement}
+
+\noindent
+\textbf{press.v.01: }\emph{exert pressure or force to or upon}
+
+\noindent
+\textbf{press.v.02: }\emph{force or impel in an indicated direction}
+
+\noindent
+\textbf{propose.v.05: }\emph{ask (someone) to marry you}
+
+\noindent
+\textbf{provide.v.02: }\emph{give what is desired or needed, especially support, food or sustenance}
+
+\noindent
+\textbf{pull.v.01: }\emph{cause to move by pulling}
+
+\noindent
+\textbf{pull.v.04: }\emph{apply force so as to cause motion towards the source of the motion}
+
+\noindent
+\textbf{push.v.01: }\emph{move with force,}
+
+\noindent
+\textbf{push.v.05: }\emph{press against forcefully without moving}
+
+\noindent
+\textbf{quarrel.v.01: }\emph{have a disagreement over something}
+
+\noindent
+\textbf{question.v.03: }\emph{pose a question}
+
+\noindent
+\textbf{quibble.v.02: }\emph{argue over petty things}
+
+\noindent
+\textbf{raid.v.01: }\emph{search without warning, make a sudden surprise attack on}
+
+\noindent
+\textbf{raise.v.02: }\emph{raise from a lower to a higher position}
+
+\noindent
+\textbf{rally.n.05: }\emph{(sports) an unbroken sequence of several successive strokes}
+
+\noindent
+\textbf{rally.v.01: }\emph{gather}
+
+\noindent
+\textbf{rally.v.05: }\emph{harass with persistent criticism or carping}
+
+\noindent
+\textbf{read.v.03: }\emph{look at, interpret, and say out loud something that is written or printed}
+
+\noindent
+\textbf{read.v.05: }\emph{interpret the significance of, as of palms, tea leaves, intestines, the sky; also of human behavior}
+
+\noindent
+\textbf{receive.v.01: }\emph{get something; come into possession of}
+
+\noindent
+\textbf{record.v.01: }\emph{make a record of; set down in permanent form}
+
+\noindent
+\textbf{refuse.v.01: }\emph{show unwillingness towards}
+
+\noindent
+\textbf{reject.v.01: }\emph{refuse to accept or acknowledge}
+
+\noindent
+\textbf{remove.v.01: }\emph{remove something concrete, as by lifting, pushing, or taking off, or remove something abstract}
+
+\noindent
+\textbf{render.v.04: }\emph{give or supply}
+
+\noindent
+\textbf{render.v.07: }\emph{give back}
+
+\noindent
+\textbf{request.v.01: }\emph{express the need or desire for; ask for}
+
+\noindent
+\textbf{resist.v.01: }\emph{elude, especially in a baffling way}
+
+\noindent
+\textbf{resist.v.02: }\emph{stand up or offer resistance to somebody or something}
+
+\noindent
+\textbf{respond.v.03: }\emph{respond favorably or as hoped}
+
+\noindent
+\textbf{return.v.01: }\emph{go or come back to place, condition, or activity where one has been before}
+
+\noindent
+\textbf{return.v.06: }\emph{return in kind}
+
+\noindent
+\textbf{rinse.v.01: }\emph{wash off soap or remaining dirt}
+
+\noindent
+\textbf{rise.v.01: }\emph{move upward}
+
+\noindent
+\textbf{rob.v.01: }\emph{take something away by force or without the consent of the owner}
+
+\noindent
+\textbf{rock.v.01: }\emph{move back and forth or sideways}
+
+\noindent
+\textbf{rub.v.01: }\emph{move over something with pressure}
+
+\noindent
+\textbf{rub.v.02: }\emph{cause friction}
+
+\noindent
+\textbf{run.v.01: }\emph{move fast by using one's feet, with one foot off the ground at any given time}
+
+\noindent
+\textbf{salute.v.02: }\emph{greet in a friendly way}
+
+\noindent
+\textbf{screen.v.02: }\emph{examine methodically}
+
+\noindent
+\textbf{seize.v.01: }\emph{take hold of; grab}
+
+\noindent
+\textbf{sell.v.01: }\emph{exchange or deliver for money or its equivalent}
+
+\noindent
+\textbf{serve.v.01: }\emph{serve a purpose, role, or function}
+
+\noindent
+\textbf{serve.v.05: }\emph{help to some food; help with food or drink}
+
+\noindent
+\textbf{serve.v.15: }\emph{put the ball into play}
+
+\noindent
+\textbf{shake.v.01: }\emph{move or cause to move back and forth}
+
+\noindent
+\textbf{shake.v.08: }\emph{bring to a specified condition by or as if by shaking}
+
+\noindent
+\textbf{sharpen.v.07: }\emph{give a point to}
+
+\noindent
+\textbf{shave.v.01: }\emph{remove body hair with a razor}
+
+\noindent
+\textbf{shear.v.01: }\emph{cut with shears}
+
+\noindent
+\textbf{show.v.01: }\emph{give an exhibition of to an interested audience}
+
+\noindent
+\textbf{show.v.04: }\emph{make visible or noticeable}
+
+\noindent
+\textbf{sing.v.01: }\emph{deliver by singing}
+
+\noindent
+\textbf{sing.v.02: }\emph{produce tones with the voice}
+
+\noindent
+\textbf{sit.v.01: }\emph{be seated}
+
+\noindent
+\textbf{sit.v.07: }\emph{be located or situated somewhere}
+
+\noindent
+\textbf{smell.v.01: }\emph{inhale the odor of; perceive by the olfactory sense}
+
+\noindent
+\textbf{smile.v.01: }\emph{change one's facial expression by spreading the lips, often to signal pleasure}
+
+\noindent
+\textbf{smile.v.02: }\emph{express with a smile}
+
+\noindent
+\textbf{snog.v.01: }\emph{touch with the lips or press the lips (against someone's mouth or other body part) as an expression of love, greeting, etc.}
+
+\noindent
+\textbf{spray.v.01: }\emph{be discharged in sprays of liquid}
+
+\noindent
+\textbf{spray.v.02: }\emph{scatter in a mass or jet of droplets}
+
+\noindent
+\textbf{sprinkle.v.02: }\emph{cause (a liquid) to spatter about, especially with force}
+
+\noindent
+\textbf{squeeze.v.02: }\emph{press firmly}
+
+\noindent
+\textbf{stand.v.01: }\emph{be standing; be upright}
+
+\noindent
+\textbf{stare.v.02: }\emph{fixate one's eyes}
+
+\noindent
+\textbf{stay.v.01: }\emph{stay the same; remain in a certain state}
+
+\noindent
+\textbf{step.v.02: }\emph{put down or press the foot, place the foot}
+
+\noindent
+\textbf{stick.v.08: }\emph{cover and decorate with objects that pierce the surface}
+
+\noindent
+\textbf{stop.v.03: }\emph{stop from happening or developing}
+
+\noindent
+\textbf{straddle.v.01: }\emph{sit or stand astride of}
+
+\noindent
+\textbf{stretch.v.02: }\emph{extend one's limbs or muscles, or the entire body}
+
+\noindent
+\textbf{stride.v.01: }\emph{walk with long steps}
+
+\noindent
+\textbf{strip.v.13: }\emph{remove (someone's or one's own) clothes}
+
+\noindent
+\textbf{stroke.v.01: }\emph{touch lightly and repeatedly, as with brushing motions}
+
+\noindent
+\textbf{struggle.v.02: }\emph{to exert strenuous effort against opposition}
+
+\noindent
+\textbf{study.v.01: }\emph{consider in detail and subject to an analysis in order to discover essential features or meaning}
+
+\noindent
+\textbf{study.v.02: }\emph{be a student; follow a course of study; be enrolled at an institute of learning}
+
+\noindent
+\textbf{support.v.01: }\emph{give moral or psychological support, aid, or courage to}
+
+\noindent
+\textbf{sweep.v.02: }\emph{move with sweeping, effortless, gliding motions}
+
+\noindent
+\textbf{swing.v.03: }\emph{change direction with a swinging motion; turn}
+
+\noindent
+\textbf{take.v.01: }\emph{carry out}
+
+\noindent
+\textbf{take.v.04: }\emph{get into one's hands, take physically}
+
+\noindent
+\textbf{take_after.v.02: }\emph{imitate in behavior; take as a model}
+
+\noindent
+\textbf{take_off.v.02: }\emph{take away or remove}
+
+\noindent
+\textbf{talk.v.01: }\emph{exchange thoughts; talk with}
+
+\noindent
+\textbf{talk.v.02: }\emph{express in speech}
+
+\noindent
+\textbf{tap.v.07: }\emph{make light, repeated taps on a surface}
+
+\noindent
+\textbf{taste.v.01: }\emph{have flavor; taste of something}
+
+\noindent
+\textbf{teach.v.01: }\emph{impart skills or knowledge to}
+
+\noindent
+\textbf{tease.v.03: }\emph{to arouse hope, desire, or curiosity without satisfying them}
+
+\noindent
+\textbf{through: }
+
+\noindent
+\textbf{throw.v.01: }\emph{propel through the air}
+
+\noindent
+\textbf{tidy.v.01: }\emph{put (things or places) in order}
+
+\noindent
+\textbf{tie.v.05: }\emph{form a knot or bow in}
+
+\noindent
+\textbf{tongue.v.02: }\emph{lick or explore with the tongue}
+
+\noindent
+\textbf{touch.v.01: }\emph{make physical contact with, come in contact with}
+
+\noindent
+\textbf{touch.v.02: }\emph{perceive via the tactile sense}
+
+\noindent
+\textbf{towards: }
+
+\noindent
+\textbf{tread.v.02: }\emph{tread or stomp heavily or roughly}
+
+\noindent
+\textbf{turn.v.04: }\emph{cause to move around or rotate}
+
+\noindent
+\textbf{turn.v.09: }\emph{move around an axis or a center}
+
+\noindent
+\textbf{tutor.v.01: }\emph{be a tutor to someone; give individual instruction}
+
+\noindent
+\textbf{undress.v.01: }\emph{get undressed}
+
+\noindent
+\textbf{unfold.v.04: }\emph{spread out or open from a closed or folded state}
+
+\noindent
+\textbf{unrobe: }
+
+\noindent
+\textbf{walk.v.01: }\emph{use one's feet to advance; advance by steps}
+
+\noindent
+\textbf{walk.v.08: }\emph{walk at a pace}
+
+\noindent
+\textbf{wash.v.01: }\emph{clean with some chemical process}
+
+\noindent
+\textbf{wash.v.02: }\emph{cleanse (one's body) with soap and water}
+
+\noindent
+\textbf{wash.v.03: }\emph{cleanse with a cleaning agent, such as soap, and water}
+
+\noindent
+\textbf{wear.v.01: }\emph{be dressed in}
+
+\noindent
+\textbf{wear.v.02: }\emph{have on one's person}
+
+\noindent
+\textbf{wear.v.05: }\emph{have or show an appearance of}
+
+\noindent
+\textbf{wear.v.09: }\emph{put clothing on one's body}
+
+\noindent
+\textbf{wheedle.v.01: }\emph{influence or urge by gentle urging, caressing, or flattering}
+
+\noindent
+\textbf{wipe.v.01: }\emph{rub with a circular motion}
+
+\noindent
+\textbf{wrap.v.01: }\emph{arrange or fold as a cover or protection}
+
+\noindent
+\textbf{write.v.02: }\emph{communicate or express by writing}
+

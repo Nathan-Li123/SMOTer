@@ -132,6 +132,23 @@ def _freeze_except_cascade_cls_reg(model):
 
     return model
 
+def _freeze_backbone_and_proposal(model):
+    try:
+        for child in model.module.backbone.children():
+            for v in child.parameters():
+                v.requires_grad = False
+        for child in model.module.proposal_generator.children():
+            for v in child.parameters():
+                v.requires_grad = False
+    except:
+        for child in model.backbone.children():
+            for v in child.parameters():
+                v.requires_grad = False
+        for child in model.proposal_generator.children():
+            for v in child.parameters():
+                v.requires_grad = False
+    return model
+
 def check_if_freeze_model(model, cfg):
     if cfg.MODEL.FREEZE_TYPE == 'ExceptROIheads':
         print('Freezing  except ROI heads!')
@@ -163,6 +180,9 @@ def check_if_freeze_model(model, cfg):
     elif cfg.MODEL.FREEZE_TYPE == 'Backbone':
         print('Freezing Backbone')
         model = _freeze_backbone(model)
+    elif cfg.MODEL.FREEZE_TYPE == 'BackboneAndProposal':
+        print('Freezing Backbone and proposal generator')
+        model = _freeze_backbone_and_proposal(model)
     else:
         assert cfg.MODEL.FREEZE_TYPE == '', cfg.MODEL.FREEZE_TYPE
     return model

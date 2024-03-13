@@ -1,4 +1,5 @@
-import cv2
+import os
+import json
 from detectron2.layers.shape_spec import ShapeSpec
 from detectron2.modeling.poolers import ROIPooler
 import torch
@@ -18,6 +19,7 @@ from .custom_rcnn import CustomRCNN
 from ..roi_heads.custom_fast_rcnn import custom_fast_rcnn_inference
 from ..tracker.byte_tracker import BYTETracker
 from ..tracker.ocsort import OCSort
+from ..tracker.sort import Sort
 
 
 @META_ARCH_REGISTRY.register()
@@ -41,6 +43,7 @@ class BYTERCNN(CustomRCNN):
         super().__init__(**kwargs)
 
         self._init_asso_head(self.cfg, self.backbone.output_shape())
+        self._init_feat_loader()
 
 
     @classmethod
@@ -82,6 +85,46 @@ class BYTERCNN(CustomRCNN):
             num_fc=cfg.MODEL.ASSO_HEAD.NUM_FC,
         )
 
+    def _init_feat_loader(self, track_results_path='/data3/motrv2_bensmot_train'):
+        with open('datasets/cvid/instance_caption.json', 'r') as f:
+            instance_captions = json.load(f)
+        with open('datasets/cvid/video_summary.json', 'r') as f:
+            video_summaries = json.load(f)
+        with open('datasets/cvid/relation.json', 'r') as f:
+            relations = json.load(f)
+        with open('datasets/cvid/track_transfer_train.json', 'r') as f:
+            transfer = json.load(f)
+        gt_seq_names = list(set(instance_captions.keys()) & set(video_summaries.keys()) & set(relations.keys()))
+        print('registered %d groundtruth sequences.' % len(gt_seq_names))
+
+        self.video_summaries = video_summaries
+        self.instance_captions = instance_captions
+        self.instance_ralations = relations
+        self.transfer = transfer
+
+        frame_feats, track_embeds = {}, {}
+        cate_dirs = os.listdir(track_results_path)
+        for cate_dir in cate_dirs:
+            cate_dir_path = os.path.join(track_results_path, cate_dir)
+            video_dirs = os.listdir(cate_dir_path)
+            for video_dir in video_dirs:
+                video_dir_path = os.path.join(cate_dir_path, video_dir)
+                seq_name = cate_dir + '/' + video_dir 
+                frame_feat_path = os.path.join(video_dir_path, 'frame_features.json')
+                track_embed_path =os.path.join(video_dir_path, 'track_embeddings.json')
+                frame_feats[seq_name] = frame_feat_path
+                track_embeds[seq_name] = track_embed_path
+        tk_seq_names = list(frame_feats.keys())
+        print('registered %d track sequences.' % len(tk_seq_names))
+        seq_names = list(set(gt_seq_names) & set(tk_seq_names))
+        print('registered %d commen sequences in total.' % len(seq_names))
+        seq_names.sort()
+
+        self.frame_feats = frame_feats
+        self.track_embeds = track_embeds
+        self.seq_names = seq_names
+        self.seq_num = len(seq_names)
+
 
     def forward(self, batched_inputs, iteration=None):
         """
@@ -120,7 +163,7 @@ class BYTERCNN(CustomRCNN):
             _, proposal_losses = self.proposal_generator(images, features, gt_instances)
         
         losses = {}
-        losses.update(proposal_losses)
+        # losses.update(proposal_losses)
         
         # strat tracking
         if iteration >= 20000:
@@ -131,17 +174,62 @@ class BYTERCNN(CustomRCNN):
             gt_tracks = self._check_gt_tracks(gt_tracks, video_info['caption'])
             transfered_pred_tracks, gt_ids = self._transfer_track_ids(gt_tracks=gt_tracks, pred_tracks=pred_tracks)
 
+            summary_info = [video_info['summary']]
+            caption_info = video_info['caption']
+            relation_info = video_info['relation']
+
+            if False:
+                s = random.randint(0, self.seq_num) - 1
+                seq_name = self.seq_names[s]
+                while seq_name not in self.transfer:
+                    s += 1
+                    seq_name = self.seq_names[s]
+                
+                relation_dict = self.instance_ralations[seq_name]
+                transfer = self.transfer[seq_name]
+
+                video_summary = self.video_summaries[seq_name]
+                with open(self.frame_feats[seq_name], 'r') as f:
+                    frame_feats = json.load(f)
+                video_features = []
+                for frame_id, frame_feat in frame_feats.items():
+                    video_features.append({'p3': torch.tensor(frame_feat).cuda()})
+
+                instance_caption_dict = self.instance_captions[seq_name]
+                with open(self.track_embeds[seq_name], 'r') as f:
+                    track_embeds = json.load(f)
+                transferred_track_embeds = {}
+                for k in track_embeds.keys():
+                    if k in transfer:
+                        transferred_track_embeds[transfer[k]] = track_embeds[k]
+                transfered_pred_tracks, gt_ids = [], []
+                for gt_id, transferred_track_embed in transferred_track_embeds.items():
+                    if gt_id not in instance_caption_dict:
+                        continue
+                    tmp = {}
+                    for t, emb in enumerate(transferred_track_embed):
+                        try:
+                            tmp[str(t+1)] = {'feat': torch.tensor(emb).repeat(4, 1).cuda()}
+                        except:
+                            raise ValueError(torch.tensor(emb).shape)
+                    transfered_pred_tracks.append(tmp)
+                    gt_ids.append(str(gt_id))
+            
+                relation_info = relation_dict
+                summary_info = [video_summary]
+                caption_info = instance_caption_dict
+
             summary_losses = self.roi_heads({
                 'feats': video_features, 'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
-                'text': [video_info['summary']], 'mode': 'summary'
+                'text': summary_info, 'mode': 'summary'
             })
             caption_losses = self.roi_heads({
                 'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
-                'texts': video_info['caption'], 'mode': 'caption'
+                'texts': caption_info, 'mode': 'caption'
             })
             relation_losses = self.roi_heads({
                 'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
-                'texts': video_info['relation'], 'mode': 'relation'
+                'texts': relation_info, 'mode': 'relation'
             })
             if summary_losses is not None:
                 losses.update(summary_losses)
@@ -149,6 +237,8 @@ class BYTERCNN(CustomRCNN):
                 losses.update(caption_losses)
             if relation_losses is not None:
                 losses.update(relation_losses)
+            if len(losses) == 0:
+                losses.update(proposal_losses)
         return losses
 
     
@@ -359,7 +449,7 @@ class BYTERCNN(CustomRCNN):
             dets = inst.pred_boxes.tensor.cpu().numpy()
             scores = inst.scores.cpu().numpy()
             cates = np.ones_like(scores)
-            dets[:, 2:] += dets[:, :2]
+            # dets[:, 2:] += dets[:, :2]
 
             tracks = local_tracker.update_public_with_inds(dets, cates, scores)
             track_inds = [int(track_ind) for track_ind in tracks[:, 7]]
@@ -382,6 +472,59 @@ class BYTERCNN(CustomRCNN):
             self.backbone.train()
             self.proposal_generator.train()
         return pred_instances, video_features
+    
+    @torch.no_grad()
+    def sort_inferene_tracks(self, batched_inputs):
+        if self.training:
+            self.backbone.eval()
+            self.proposal_generator.eval()
+        local_tracker = Sort(max_age=1, min_hits=3, iou_threshold=0.3)
+        video_len = len(batched_inputs)
+        instances = []
+        ret_instances = []
+        video_features = []
+        for frame_id in range(video_len):
+            # instances_wo_id = self.inference(
+            #     batched_inputs[frame_id: frame_id + 1], 
+            #     do_postprocess=False)
+            images = self.preprocess_image(batched_inputs[frame_id: frame_id + 1])
+            features = self.backbone(images.tensor)
+            video_features.append(features)
+            proposals, _ = self.proposal_generator(images, features, None)
+            instances_wo_id = self._get_insts_with_feats(proposals=proposals, features=features)            
+            instances.extend([x for x in instances_wo_id])
+            inst = instances[frame_id]
+
+            dets = inst.pred_boxes.tensor.cpu().numpy()
+            if dets.ndim == 1:
+                dets = np.expand_dims(dets)
+            dets = np.asarray([bbox + [1] for bbox in dets])
+            if len(dets) == 0:
+                continue
+            # dets[:, 2:4] += dets[:, 0:2] #convert to [x1,y1,w,h] to [x1,y1,x2,y2]
+
+            tracks = local_tracker.update(dets)
+            track_inds = [int(track_ind) for track_ind in tracks[:, 5]]
+            track_ids = [int(track_id) for track_id in tracks[:, 4]]
+            track_inds = list(set(track_inds))
+            track_ids = list(set(track_ids))
+            assert len(track_inds) == len(track_ids)
+
+            ret_inst = inst[track_inds]
+            ret_inst.track_ids = ret_inst.pred_classes.new_tensor(track_ids)
+            ret_instances.append(ret_inst)
+        instances = ret_instances
+
+        if self.min_track_len > 0:
+            instances = self._remove_short_track(instances)
+        pred_instances = CustomRCNN._postprocess(
+                instances, batched_inputs, [
+                    (0, 0) for _ in range(len(batched_inputs))],
+                not_clamp_box=self.not_clamp_box)
+        if self.training:
+            self.backbone.train()
+            self.proposal_generator.train()
+        return pred_instances, video_features
 
 
     def local_tracker_inference(self, batched_inputs):
@@ -389,24 +532,63 @@ class BYTERCNN(CustomRCNN):
         batched_inputs = batched_inputs[:-1]
         # get gt for evalutaions only
         gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
-        # pred_instances, video_features = self.inferene_tracks(batched_inputs)
         pred_instances, video_features = self.inferene_tracks(batched_inputs)
         # track finished
         pred_tracks = self._post_process_tracks(pred_instances, gt=False)
         gt_tracks = self._post_process_tracks(gt_instances, gt=True)
         gt_tracks = self._check_gt_tracks(gt_tracks, video_info['caption'])
         transfered_pred_tracks, gt_ids = self._transfer_track_ids(gt_tracks=gt_tracks, pred_tracks=pred_tracks)
-        
-        pred_summary = self.roi_heads({'feats': video_features, 'pred_tracks': transfered_pred_tracks, 'mode': 'summary'})
-        gt_summary = video_info['summary']
-        
-        pred_captions = self.roi_heads({'pred_tracks': transfered_pred_tracks, 'mode': 'caption'})
+
+        relation_info = video_info['relation']
         gt_captions = []
         for gt_id in gt_ids:
             gt_captions.append(video_info['caption'][gt_id])
+        gt_summary = video_info['summary']
 
+        if False:
+            s = random.randint(0, self.seq_num) - 1
+            seq_name = self.seq_names[s]
+            while seq_name not in self.transfer:
+                s += 1
+                seq_name = self.seq_names[s]
+            
+            relation_dict = self.instance_ralations[seq_name]
+            transfer = self.transfer[seq_name]
+
+            video_summary = self.video_summaries[seq_name]
+            gt_summary = video_summary
+            with open(self.frame_feats[seq_name], 'r') as f:
+                frame_feats = json.load(f)
+            video_features = []
+            for frame_id, frame_feat in frame_feats.items():
+                video_features.append({'p3': torch.tensor(frame_feat).cuda()})
+
+            instance_caption_dict = self.instance_captions[seq_name]
+            with open(self.track_embeds[seq_name], 'r') as f:
+                track_embeds = json.load(f)
+            transferred_track_embeds = {}
+            for k in track_embeds.keys():
+                if k in transfer:
+                    transferred_track_embeds[transfer[k]] = track_embeds[k]
+            transfered_pred_tracks, gt_ids, gt_captions = [], [], []
+            for gt_id, transferred_track_embed in transferred_track_embeds.items():
+                if gt_id not in instance_caption_dict:
+                    continue
+                tmp = {}
+                for t, emb in enumerate(transferred_track_embed):
+                    tmp[str(t+1)] = {'feat': torch.tensor(emb).repeat(4).cuda()}
+                transfered_pred_tracks.append(tmp)
+                gt_ids.append(str(gt_id))
+                gt_captions.append(instance_caption_dict[gt_id])
+            
+            relation_info = relation_dict
+        # import pdb
+        # pdb.set_trace()
+        
+        pred_summary = self.roi_heads({'feats': video_features, 'pred_tracks': transfered_pred_tracks, 'mode': 'summary'})
+        pred_captions = self.roi_heads({'pred_tracks': transfered_pred_tracks, 'mode': 'caption'})
         pred_relations = self.roi_heads({'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
-                                        'texts': video_info['relation'],'mode': 'relation'})
+                                        'texts': relation_info,'mode': 'relation'})
         if pred_relations is None:
             pred_relations = []
         else:
@@ -417,8 +599,8 @@ class BYTERCNN(CustomRCNN):
                 gt_id_i = gt_ids[i]
                 gt_id_j = gt_ids[j]
                 k = str(gt_id_i) + '-' + str(gt_id_j)
-                if k in video_info['relation']:
-                    gt_relations.append(get_relation_labels(video_info['relation'][k]))
+                if k in relation_info:
+                    gt_relations.append(get_relation_labels(relation_info[k]))
         gt_relations = [gt.cpu().tolist() for gt in gt_relations]
         assert len(pred_relations) == len(gt_relations)
         

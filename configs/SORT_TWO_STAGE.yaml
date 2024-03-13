@@ -9,8 +9,7 @@ MODEL:
     NAME: GRiTROIHeads
     PROPOSAL_APPEND_GT: False
     NO_BOX_HEAD: True
-  WEIGHTS: 'models/CH_FPN_1x.pth'
-  # WEIGHTS: 'output/GTR_MOT/smoter/model_0059999.pth'
+  WEIGHTS: 'output/GTR_MOT/smoter/model_0019999.pth'
   ASSO_ON: True
   ASSO_HEAD:
     NEG_UNMATCHED: True
@@ -21,7 +20,7 @@ MODEL:
     NO_POS_EMB: True
 SOLVER:
   USE_CUSTOM_SOLVER: True
-  MAX_ITER: 70000
+  MAX_ITER: 40000
   LR_SCHEDULER_NAME: "WarmupCosineLR"
   BASE_LR: 0.00005
   OPTIMIZER: ADAMW

@@ -214,6 +214,7 @@ def do_train(cfg, model, resume=False):
                     total_loss=losses_reduced, **loss_dict_reduced)
 
             optimizer.zero_grad()
+            losses.requires_grad_(True)
             losses.backward()
             optimizer.step()
             

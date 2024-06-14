@@ -199,6 +199,9 @@ class GTRDatasetMapper(DatasetMapper):
         summary = video_dict['summary']
         caption = video_dict['caption']
         relation = video_dict['relation']
+        # summary = {}
+        # caption = {}
+        # relation = {}
         # end mod for vu
         
         ret = []

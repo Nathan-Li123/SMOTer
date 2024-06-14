@@ -43,7 +43,7 @@ class BYTERCNN(CustomRCNN):
         super().__init__(**kwargs)
 
         self._init_asso_head(self.cfg, self.backbone.output_shape())
-        self._init_feat_loader()
+        # self._init_feat_loader()
 
 
     @classmethod
@@ -136,12 +136,10 @@ class BYTERCNN(CustomRCNN):
         if not self.training:
             return self.local_tracker_inference(batched_inputs)
         assert iteration is not None
-
         video_info = batched_inputs[-1]
         batched_inputs = batched_inputs[:-1]
         images = self.preprocess_image(batched_inputs)
         gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
-        
         num_images = len(images)
         if iteration >= 20000:
             min_num = 6
@@ -163,7 +161,7 @@ class BYTERCNN(CustomRCNN):
             _, proposal_losses = self.proposal_generator(images, features, gt_instances)
         
         losses = {}
-        # losses.update(proposal_losses)
+        losses.update(proposal_losses)
         
         # strat tracking
         if iteration >= 20000:
@@ -175,8 +173,9 @@ class BYTERCNN(CustomRCNN):
             transfered_pred_tracks, gt_ids = self._transfer_track_ids(gt_tracks=gt_tracks, pred_tracks=pred_tracks)
 
             summary_info = [video_info['summary']]
-            caption_info = video_info['caption']
-            relation_info = video_info['relation']
+            # caption_info = video_info['caption']
+            # relation_info = video_info['relation']
+            
 
             if False:
                 s = random.randint(0, self.seq_num) - 1
@@ -223,20 +222,20 @@ class BYTERCNN(CustomRCNN):
                 'feats': video_features, 'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
                 'text': summary_info, 'mode': 'summary'
             })
-            caption_losses = self.roi_heads({
-                'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
-                'texts': caption_info, 'mode': 'caption'
-            })
-            relation_losses = self.roi_heads({
-                'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
-                'texts': relation_info, 'mode': 'relation'
-            })
+            # caption_losses = self.roi_heads({
+            #     'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
+            #     'texts': caption_info, 'mode': 'caption'
+            # })
+            # relation_losses = self.roi_heads({
+            #     'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
+            #     'texts': relation_info, 'mode': 'relation'
+            # })
             if summary_losses is not None:
                 losses.update(summary_losses)
-            if caption_losses is not None:
-                losses.update(caption_losses)
-            if relation_losses is not None:
-                losses.update(relation_losses)
+            # if caption_losses is not None:
+            #     losses.update(caption_losses)
+            # if relation_losses is not None:
+            #     losses.update(relation_losses)
             if len(losses) == 0:
                 losses.update(proposal_losses)
         return losses
@@ -586,22 +585,25 @@ class BYTERCNN(CustomRCNN):
         # pdb.set_trace()
         
         pred_summary = self.roi_heads({'feats': video_features, 'pred_tracks': transfered_pred_tracks, 'mode': 'summary'})
-        pred_captions = self.roi_heads({'pred_tracks': transfered_pred_tracks, 'mode': 'caption'})
-        pred_relations = self.roi_heads({'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, \
-                                        'texts': relation_info,'mode': 'relation'})
-        if pred_relations is None:
-            pred_relations = []
-        else:
-            pred_relations = pred_relations.cpu().tolist()
+        # pred_captions = self.roi_heads({'pred_tracks': transfered_pred_tracks, 'mode': 'caption'})
+        pred_relations = self.roi_heads({'pred_tracks': transfered_pred_tracks, 'gt_ids': gt_ids, 'texts': relation_info,'mode': 'relation'})
+        # pred_summary = []
+        pred_captions = []
+
+        # if pred_relations is None:
+        #     pred_relations = []
+        # else:
+        #     pred_relations = pred_relations.cpu().tolist()
+        pred_relations = []
         gt_relations = []
-        for i in range(len(gt_ids)):
-            for j in range(len(gt_ids)):
-                gt_id_i = gt_ids[i]
-                gt_id_j = gt_ids[j]
-                k = str(gt_id_i) + '-' + str(gt_id_j)
-                if k in relation_info:
-                    gt_relations.append(get_relation_labels(relation_info[k]))
-        gt_relations = [gt.cpu().tolist() for gt in gt_relations]
+        # for i in range(len(gt_ids)):
+        #     for j in range(len(gt_ids)):
+        #         gt_id_i = gt_ids[i]
+        #         gt_id_j = gt_ids[j]
+        #         k = str(gt_id_i) + '-' + str(gt_id_j)
+        #         if k in relation_info:
+        #             gt_relations.append(get_relation_labels(relation_info[k]))
+        # gt_relations = [gt.cpu().tolist() for gt in gt_relations]
         assert len(pred_relations) == len(gt_relations)
         
         return pred_instances, {'pred': pred_summary, 'gt': [gt_summary]}, {'pred': pred_captions, 'gt': gt_captions}, {'pred': pred_relations, 'gt': gt_relations}

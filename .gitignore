@@ -1,9 +1,9 @@
-third_party/detectron2
 backup
 datasets
 *.pth
 slurm-*.out
 slurm-output
+detectron2
 # output dir
 output
 instant_test_output
@@ -48,13 +48,3 @@ model_ts*.txt
 .idea
 .vscode
 _darcs
-
-# project dirs
-/detectron2/model_zoo/configs
-/datasets/*
-!/datasets/*.*
-!/datasets/README.md
-!/datasets/metadata/
-/projects/*/datasets
-/models
-/snippet

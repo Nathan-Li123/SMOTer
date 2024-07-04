@@ -39,18 +39,18 @@ from detectron2.utils.logger import setup_logger
 sys.path.insert(0, 'third_party/CenterNet2/')
 from centernet.config import add_centernet_config
 
-from gtr.config import add_gtr_config
-from gtr.data.custom_build_augmentation import build_custom_augmentation
-from gtr.data.custom_dataset_dataloader import  build_custom_train_loader
-from gtr.data.custom_dataset_mapper import CustomDatasetMapper
-from gtr.data.gtr_dataset_dataloader import build_gtr_train_loader
-from gtr.data.gtr_dataset_dataloader import build_gtr_test_loader
-from gtr.data.gtr_dataset_mapper import GTRDatasetMapper
-from gtr.costom_solver import build_custom_optimizer
-from gtr.evaluation.custom_lvis_evaluation import CustomLVISEvaluator
-from gtr.evaluation.mot_evaluation import MOTEvaluator
-from gtr.evaluation.cvid_evaluation import CVIDEvaluator
-from gtr.modeling.freeze_layers import check_if_freeze_model
+from smoter.config import add_smoter_config
+from smoter.data.custom_build_augmentation import build_custom_augmentation
+from smoter.data.custom_dataset_dataloader import  build_custom_train_loader
+from smoter.data.custom_dataset_mapper import CustomDatasetMapper
+from smoter.data.gtr_dataset_dataloader import build_gtr_train_loader
+from smoter.data.gtr_dataset_dataloader import build_gtr_test_loader
+from smoter.data.gtr_dataset_mapper import GTRDatasetMapper
+from smoter.costom_solver import build_custom_optimizer
+from smoter.evaluation.custom_lvis_evaluation import CustomLVISEvaluator
+from smoter.evaluation.mot_evaluation import MOTEvaluator
+from smoter.evaluation.bensmot_evaluation import BenSMOTEvaluator
+from smoter.modeling.freeze_layers import check_if_freeze_model
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -102,8 +102,8 @@ def do_test(cfg, model):
             evaluator = COCOEvaluator(dataset_name, cfg, True, output_folder)
         elif evaluator_type == 'mot':
             evaluator = MOTEvaluator(dataset_name, cfg, False, output_folder)
-        elif evaluator_type == 'cvid':
-            evaluator = CVIDEvaluator(dataset_name, cfg, False, output_folder)
+        elif evaluator_type == 'bensmot':
+            evaluator = BenSMOTEvaluator(dataset_name, cfg, False, output_folder)
         else:
             assert 0, evaluator_type
 
@@ -250,7 +250,7 @@ def setup(args):
     """
     cfg = get_cfg()
     add_centernet_config(cfg)
-    add_gtr_config(cfg)
+    add_smoter_config(cfg)
     cfg.merge_from_file(args.config_file)
     cfg.merge_from_list(args.opts)
     if '/auto' in cfg.OUTPUT_DIR:

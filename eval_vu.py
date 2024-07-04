@@ -60,9 +60,6 @@ def main():
     summary_path = 'output/pred_results/summary_results.json'
     caption_path = 'output/pred_results/caption_results.json'
     relation_path = 'output/pred_results/relation_results.json'
-    # summary_path = 'output/records/oc-ablation/summary_results.json'
-    # caption_path = 'output/records/oc-ablation/caption_results.json'
-    # relation_path = 'output/records/oc-ablation/relation_results.json'
     with open(summary_path, 'r') as f:
         summary_data = json.load(f)
     with open(caption_path, 'r') as f:

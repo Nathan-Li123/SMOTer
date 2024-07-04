@@ -1,5 +1,5 @@
 ==============================================================================
-Code under gtr/tracking/trackeval is from https://github.com/JonathonLuiten/TrackEval
+Code under smoter/tracking/trackeval is from https://github.com/JonathonLuiten/TrackEval
 The code is under MIT License
 ==============================================================================
    
@@ -27,7 +27,7 @@ SOFTWARE.
 
 
 ==============================================================================
-Code under gtr/tracking/local_tracker is from https://github.com/ifzhang/FairMOT
+Code under smoter/tracking/local_tracker is from https://github.com/ifzhang/FairMOT
 The code is under MIT License
 ==============================================================================
    

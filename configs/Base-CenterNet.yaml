@@ -63,4 +63,4 @@ INPUT:
   CUSTOM_AUG: EfficientDetResizeCrop
   TRAIN_SIZE: 896
   NOT_CLAMP_BOX: True
-OUTPUT_DIR: "./output/GTR_MOT/auto"
+OUTPUT_DIR: "./output/SMOTer/auto"

@@ -62,4 +62,4 @@ DATALOADER:
 INPUT:
   CUSTOM_AUG: EfficientDetResizeCrop
   TRAIN_SIZE: 896
-OUTPUT_DIR: "./output/GTR_TAO/auto"
+OUTPUT_DIR: "./output/SMOTer/auto"

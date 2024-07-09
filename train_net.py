@@ -43,9 +43,9 @@ from smoter.config import add_smoter_config
 from smoter.data.custom_build_augmentation import build_custom_augmentation
 from smoter.data.custom_dataset_dataloader import  build_custom_train_loader
 from smoter.data.custom_dataset_mapper import CustomDatasetMapper
-from smoter.data.gtr_dataset_dataloader import build_gtr_train_loader
-from smoter.data.gtr_dataset_dataloader import build_gtr_test_loader
-from smoter.data.gtr_dataset_mapper import GTRDatasetMapper
+from smoter.data.smoter_dataset_dataloader import build_smoter_train_loader
+from smoter.data.smoter_dataset_dataloader import build_smoter_test_loader
+from smoter.data.smoter_dataset_mapper import SMOTDatasetMapper
 from smoter.costom_solver import build_custom_optimizer
 from smoter.evaluation.custom_lvis_evaluation import CustomLVISEvaluator
 from smoter.evaluation.mot_evaluation import MOTEvaluator
@@ -121,11 +121,11 @@ def do_test(cfg, model):
             #   due to unknown system issue. Try to fix.
             torch.multiprocessing.set_sharing_strategy('file_system')
             if cfg.INPUT.TEST_INPUT_TYPE == 'default':
-                mapper = GTRDatasetMapper(cfg, False)
+                mapper = SMOTDatasetMapper(cfg, False)
             else:
-                mapper = GTRDatasetMapper(
+                mapper = SMOTDatasetMapper(
                     cfg, False, augmentations=build_custom_augmentation(cfg, False))
-            data_loader = build_gtr_test_loader(cfg, dataset_name, mapper)
+            data_loader = build_smoter_test_loader(cfg, dataset_name, mapper)
             results[dataset_name], summary[dataset_name], caption[dataset_name], relation[dataset_name] = inference_on_dataset(
                 model, data_loader, evaluator, 
             )
@@ -179,12 +179,12 @@ def do_train(cfg, model, resume=False):
         else []
     )
 
-    DatasetMapperClass = GTRDatasetMapper if cfg.VIDEO_INPUT else \
+    DatasetMapperClass = SMOTDatasetMapper if cfg.VIDEO_INPUT else \
         CustomDatasetMapper
     mapper = DatasetMapperClass(
         cfg, True, augmentations=build_custom_augmentation(cfg, True))
     if cfg.VIDEO_INPUT:
-        data_loader = build_gtr_train_loader(cfg, mapper=mapper)
+        data_loader = build_smoter_train_loader(cfg, mapper=mapper)
     else:
         data_loader = build_custom_train_loader(cfg, mapper=mapper)
 

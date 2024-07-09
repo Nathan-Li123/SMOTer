@@ -407,6 +407,8 @@ class BYTERCNN(CustomRCNN):
             pred_relations = []
         else:
             pred_relations = pred_relations.cpu().tolist()
+
+        gt_relations = []
         for i in range(len(gt_ids)):
             for j in range(len(gt_ids)):
                 gt_id_i = gt_ids[i]

@@ -1,6 +1,5 @@
 _BASE_: "Base-CenterNet.yaml"
 MODEL:
-  FREEZE_TYPE: ExceptROIheads
   META_ARCHITECTURE: "BYTERCNN"
   CENTERNET:
     USE_DEFORMABLE: True

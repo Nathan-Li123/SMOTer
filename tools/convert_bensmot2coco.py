@@ -18,8 +18,8 @@ if __name__ == '__main__':
         caption_dict = json.load(f)
     with open('datasets/bensmot/relation.json', 'r') as f:
         relation_dict = json.load(f)
-    seqmap = open('datasets/bensmot/seqmaps/test.txt', 'w')
-    seqmap.write('name\n')
+    # seqmap = open('datasets/bensmot/seqmaps/BenSMOT-val.txt', 'w')
+    # seqmap.write('name\n')
     for split in SPLITS:
         out = {'images': [], 'annotations': [], 'categories': [{'id': 1, 'name': 'person'}], 'videos': []}
         image_cnt = 0
@@ -40,8 +40,8 @@ if __name__ == '__main__':
                 video_cnt += 1
                 out['videos'].append({'id': video_cnt, 'file_name': seq_name,\
                                         'summary': video_summary, 'caption': inst_caption, 'relation': inter_relation})
-                if split == 'test':
-                    seqmap.write(seq_name + '\n')
+                # if split == 'test':
+                #     seqmap.write(seq_name + '\n')
                 
 
                 jpg_files = os.listdir(os.path.join(seq_dir_path, 'imgs'))
@@ -91,4 +91,4 @@ if __name__ == '__main__':
         out_path = os.path.join(OUT_PATH, split + '.json')
         with open(out_path, 'w') as f:
             json.dump(out, f)        
-    seqmap.close()
+    # seqmap.close()

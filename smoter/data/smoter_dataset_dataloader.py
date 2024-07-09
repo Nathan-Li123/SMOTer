@@ -25,7 +25,7 @@ def single_batch_collator(batch):
     return batch[0]
 
 
-def build_gtr_train_loader(cfg, mapper):
+def build_smoter_train_loader(cfg, mapper):
     """
     Modified from detectron2.data.build.build_custom_train_loader, but supports
     different samplers
@@ -74,7 +74,7 @@ def build_gtr_train_loader(cfg, mapper):
     )
 
 
-def build_gtr_test_loader(cfg, dataset_name, mapper):
+def build_smoter_test_loader(cfg, dataset_name, mapper):
     """
     """
     dataset = get_video_dataset_dicts(

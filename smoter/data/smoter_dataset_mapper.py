@@ -16,7 +16,7 @@ from detectron2.structures import Keypoints, PolygonMasks, BitMasks
 
 from .custom_dataset_mapper import custom_transform_instance_annotations 
 from .transforms.custom_augmentation_impl import EfficientDetResizeCrop
-__all__ = ["GTRDatasetMapper"]
+__all__ = ["SMOTDatasetMapper"]
 
 
 def custom_annotations_to_instances(annos, image_size, mask_format="polygon", \
@@ -77,7 +77,7 @@ def custom_annotations_to_instances(annos, image_size, mask_format="polygon", \
     return target
 
 
-class GTRDatasetMapper(DatasetMapper):
+class SMOTDatasetMapper(DatasetMapper):
     @configurable
     def __init__(
         self,

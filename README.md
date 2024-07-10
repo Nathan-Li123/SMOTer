@@ -1,6 +1,6 @@
 # Beyond MOT: Semantic Multi-Object Tracking
 Beyond MOT: Semantic Multi-Object Tracking <br>
-Yunhao Li, Qin Li, Hao Wang, Xue Ma, Jiali Yao, Shaohua Dong, Heng Fan, Libo Zhang <br>
+Yunhao Li, Hao Wang, Qin Li, Xue Ma, Jiali Yao, Shaohua Dong, Heng Fan, Libo Zhang <br>
 [`arXiv`](https://arxiv.org/abs/2403.05021) [`Dataset`](https://mailsucasaccn-my.sharepoint.com/:f:/g/personal/liyunhao23_mails_ucas_ac_cn/Et6ORndJAJZIic2rIzA3VjYBgNwW58TUnsxVB61s9taJcg?e=FpLhAp)
 
 ## Semantic Multi-Object Tracking

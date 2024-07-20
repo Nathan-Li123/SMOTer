@@ -53,7 +53,7 @@ datasets
 |   └──relation.json
 ```
 4. Modify the `DATA_PATH` in `tools/convert_bensmot2coco.py` to the BenSMOT root directory you are using.
-5. run `tools/convert_bensmot2coco.py` to create `train.json` and `test.json`` files in the `annotations` folder, and create a `test.txt` file in the `seqmaps` folder. 
+5. run `tools/convert_bensmot2coco.py` to create `train.json` and `test.json` files in the `annotations` folder, and create a `test.txt` file in the `seqmaps` folder. 
 
 ### Training and Evaluation
 Please use the scripts provided in `scripts/bensmot.sh` for training and evaluation. The weights files used in the process can be downloaded here ([one drive](https://mailsucasaccn-my.sharepoint.com/:f:/g/personal/liyunhao23_mails_ucas_ac_cn/EhcMubyTKB1OqNchDySUtQABL9fbALawt3KVbYNpd9GLnA?e=HwhU3S)). 

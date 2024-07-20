@@ -56,7 +56,7 @@ datasets
 5. run `tools/convert_bensmot2coco.py` to create `train.json` and `test.json`` files in the `annotations` folder, and create a `test.txt` file in the `seqmaps` folder. 
 
 ### Training and Evaluation
-Please use the scripts provided in `scripts/bensmot.sh` for training and evaluation.
+Please use the scripts provided in `scripts/bensmot.sh` for training and evaluation. The weights files used in the process can be downloaded here ([one drive](https://mailsucasaccn-my.sharepoint.com/:f:/g/personal/liyunhao23_mails_ucas_ac_cn/EhcMubyTKB1OqNchDySUtQABL9fbALawt3KVbYNpd9GLnA?e=HwhU3S)). 
 ```shell
 # train
 CUDA_VISIBLE_DEVICES=0,1,2,3 python train_net.py --num-gpus 4 --config-file configs/BYTE_BENSMOT_FPN.yaml

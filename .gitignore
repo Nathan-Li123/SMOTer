@@ -1,5 +1,6 @@
 backup
 datasets
+!/*/*/datasets/
 *.pth
 slurm-*.out
 slurm-output

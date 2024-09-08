@@ -72,10 +72,10 @@ Our code repository is built upon [xingyizhou/GTR](https://github.com/xingyizhou
 ### Citation
 If you find this project useful for your research, please use the following BibTeX entry.
 ```text
-@article{li2024beyond,
+@inproceedings{li2024beyond,
   title={Beyond MOT: Semantic Multi-Object Tracking},
   author={Li, Yunhao and Wang, Hao and Ma, Xue and Yao, Jiali and Dong, Shaohua and Fan, Heng and Zhang, Libo},
-  journal={arXiv preprint arXiv:2403.05021},
+  booktitle={ECCV},
   year={2024}
 }
 ```

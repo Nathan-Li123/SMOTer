@@ -1,7 +1,7 @@
 # Beyond MOT: Semantic Multi-Object Tracking
 Beyond MOT: Semantic Multi-Object Tracking <br>
-Yunhao Li, Hao Wang, Qin Li, Xue Ma, Jiali Yao, Shaohua Dong, Heng Fan, Libo Zhang <br>
-European Conference on Computer Vision (ECCV), 2024. <br>
+Yunhao Li, Qin Li, Hao Wang, Xue Ma, Jiali Yao, Shaohua Dong, Heng Fan*, Libo Zhang* <br>
+European Conference on Computer Vision (ECCV), 2024. (*equal advising and co-last author)<br>
 [`arXiv`](https://arxiv.org/abs/2403.05021) [`Dataset`](https://mailsucasaccn-my.sharepoint.com/:f:/g/personal/liyunhao23_mails_ucas_ac_cn/Et6ORndJAJZIic2rIzA3VjYBgNwW58TUnsxVB61s9taJcg?e=FpLhAp)
 
 ## Semantic Multi-Object Tracking
@@ -72,10 +72,10 @@ Our code repository is built upon [xingyizhou/GTR](https://github.com/xingyizhou
 ### Citation
 If you find this project useful for your research, please use the following BibTeX entry.
 ```text
-@article{li2024beyond,
+@inproceedings{li2024beyond,
   title={Beyond MOT: Semantic Multi-Object Tracking},
   author={Li, Yunhao and Wang, Hao and Ma, Xue and Yao, Jiali and Dong, Shaohua and Fan, Heng and Zhang, Libo},
-  journal={arXiv preprint arXiv:2403.05021},
+  booktitle={ECCV},
   year={2024}
 }
 ```

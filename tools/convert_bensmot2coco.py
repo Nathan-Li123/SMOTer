@@ -50,7 +50,7 @@ if __name__ == '__main__':
                 for i in range(len(jpg_files)):
                     jpg_file = jpg_files[i]
                     image_cnt += 1
-                    img_path = seq_name + '/' + jpg_file
+                    img_path = seq_name + '/imgs/' + jpg_file
                     img = Image.open(os.path.join(seq_dir_path, 'imgs', jpg_file))
                     img_h, img_w = img.height, img.width
                     img.close()
@@ -69,10 +69,8 @@ if __name__ == '__main__':
 
                     frame_id = int(jpg_file.split('.')[0])
                     for row in lbl_data:
-                        if int(row[0]) < frame_id:
+                        if int(row[0]) != frame_id:
                             continue
-                        elif int(row[0]) > frame_id:
-                            break
                         else:
                             track_id = int(row[1])
                             bbox = [float(row[2]), float(row[3]), float(row[4]), float(row[5])]

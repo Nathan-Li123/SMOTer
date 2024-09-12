@@ -85,45 +85,45 @@ class BYTERCNN(CustomRCNN):
             num_fc=cfg.MODEL.ASSO_HEAD.NUM_FC,
         )
 
-    def _init_feat_loader(self, track_results_path='/data3/motrv2_bensmot_train'):
-        with open('datasets/bensmot/instance_caption.json', 'r') as f:
-            instance_captions = json.load(f)
-        with open('datasets/bensmot/video_summary.json', 'r') as f:
-            video_summaries = json.load(f)
-        with open('datasets/bensmot/relation.json', 'r') as f:
-            relations = json.load(f)
-        with open('datasets/bensmot/track_transfer_train.json', 'r') as f:
-            transfer = json.load(f)
-        gt_seq_names = list(set(instance_captions.keys()) & set(video_summaries.keys()) & set(relations.keys()))
-        print('registered %d groundtruth sequences.' % len(gt_seq_names))
+    # def _init_feat_loader(self, track_results_path='/data3/motrv2_bensmot_train'):
+    #     with open('datasets/bensmot/instance_caption.json', 'r') as f:
+    #         instance_captions = json.load(f)
+    #     with open('datasets/bensmot/video_summary.json', 'r') as f:
+    #         video_summaries = json.load(f)
+    #     with open('datasets/bensmot/relation.json', 'r') as f:
+    #         relations = json.load(f)
+    #     with open('datasets/bensmot/track_transfer_train.json', 'r') as f:
+    #         transfer = json.load(f)
+    #     gt_seq_names = list(set(instance_captions.keys()) & set(video_summaries.keys()) & set(relations.keys()))
+    #     print('registered %d groundtruth sequences.' % len(gt_seq_names))
 
-        self.video_summaries = video_summaries
-        self.instance_captions = instance_captions
-        self.instance_ralations = relations
-        self.transfer = transfer
+    #     self.video_summaries = video_summaries
+    #     self.instance_captions = instance_captions
+    #     self.instance_ralations = relations
+    #     self.transfer = transfer
 
-        frame_feats, track_embeds = {}, {}
-        cate_dirs = os.listdir(track_results_path)
-        for cate_dir in cate_dirs:
-            cate_dir_path = os.path.join(track_results_path, cate_dir)
-            video_dirs = os.listdir(cate_dir_path)
-            for video_dir in video_dirs:
-                video_dir_path = os.path.join(cate_dir_path, video_dir)
-                seq_name = cate_dir + '/' + video_dir 
-                frame_feat_path = os.path.join(video_dir_path, 'frame_features.json')
-                track_embed_path =os.path.join(video_dir_path, 'track_embeddings.json')
-                frame_feats[seq_name] = frame_feat_path
-                track_embeds[seq_name] = track_embed_path
-        tk_seq_names = list(frame_feats.keys())
-        print('registered %d track sequences.' % len(tk_seq_names))
-        seq_names = list(set(gt_seq_names) & set(tk_seq_names))
-        print('registered %d commen sequences in total.' % len(seq_names))
-        seq_names.sort()
+    #     frame_feats, track_embeds = {}, {}
+    #     cate_dirs = os.listdir(track_results_path)
+    #     for cate_dir in cate_dirs:
+    #         cate_dir_path = os.path.join(track_results_path, cate_dir)
+    #         video_dirs = os.listdir(cate_dir_path)
+    #         for video_dir in video_dirs:
+    #             video_dir_path = os.path.join(cate_dir_path, video_dir)
+    #             seq_name = cate_dir + '/' + video_dir 
+    #             frame_feat_path = os.path.join(video_dir_path, 'frame_features.json')
+    #             track_embed_path =os.path.join(video_dir_path, 'track_embeddings.json')
+    #             frame_feats[seq_name] = frame_feat_path
+    #             track_embeds[seq_name] = track_embed_path
+    #     tk_seq_names = list(frame_feats.keys())
+    #     print('registered %d track sequences.' % len(tk_seq_names))
+    #     seq_names = list(set(gt_seq_names) & set(tk_seq_names))
+    #     print('registered %d commen sequences in total.' % len(seq_names))
+    #     seq_names.sort()
 
-        self.frame_feats = frame_feats
-        self.track_embeds = track_embeds
-        self.seq_names = seq_names
-        self.seq_num = len(seq_names)
+    #     self.frame_feats = frame_feats
+    #     self.track_embeds = track_embeds
+    #     self.seq_names = seq_names
+    #     self.seq_num = len(seq_names)
 
 
     def forward(self, batched_inputs, iteration=None):
@@ -141,10 +141,10 @@ class BYTERCNN(CustomRCNN):
         images = self.preprocess_image(batched_inputs)
         gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
         num_images = len(images)
-        if iteration >= 20000:
+        if iteration >= 0:
             min_num = 6
         else:
-            min_num = 10
+            min_num = 8
         if num_images > min_num:
             idx = random.randint(0, num_images - min_num)
             tmp_images = torch.stack(images.tensor.unbind(0)[idx:idx+min_num])
@@ -164,7 +164,7 @@ class BYTERCNN(CustomRCNN):
         losses.update(proposal_losses)
         
         # strat tracking
-        if iteration >= 20000:
+        if iteration >= 0:
             pred_instances, video_features = self.inferene_tracks(batched_inputs)
             # end tracking
             pred_tracks = self._post_process_tracks(pred_instances, gt=False)

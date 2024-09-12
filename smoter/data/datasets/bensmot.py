@@ -123,10 +123,10 @@ def _get_builtin_metadata():
 
 
 _PREDEFINED_SPLITS = {
-    "bensmot_train": ("/data3/InsCap/imgs", 
-        "bensmot/annotations/train_vu.json"),
-    "bensmot_val": ("/data3/InsCap/imgs", 
-        "bensmot/annotations/val_vu.json"),
+    "bensmot_train": ("/data3/SMOT/BenSMOT/train", 
+        "bensmot/annotations/train.json"),
+    "bensmot_val": ("/data3/SMOT/BenSMOT/test", 
+        "bensmot/annotations/test.json"),
 }
 
 for key, (image_root, json_file) in _PREDEFINED_SPLITS.items():

@@ -201,7 +201,7 @@ class GRiTROIHeads(CascadeROIHeads):
     def forward(self, batch):
         batch = self._post_process_batch(batch)
         if batch is None:
-            return None     
+            return None
         fused_feats = self._fuse_feat(batch)
         
         if self.training:

@@ -112,9 +112,9 @@ def get_video_dataset_dicts(
         assert len(dicts), "Dataset '{}' is empty!".format(dataset_name)
         # mod for vu 01
         if dataset_name == 'bensmot_train':
-            json_path = 'datasets/bensmot/annotations/train_vu.json'
+            json_path = 'datasets/bensmot/annotations/train.json'
         elif dataset_name == 'bensmot_val':
-            json_path = 'datasets/bensmot/annotations/val_vu.json'
+            json_path = 'datasets/bensmot/annotations/test.json'
         
         if 'bensmot' in dataset_name:
             with open(json_path, 'r') as f:

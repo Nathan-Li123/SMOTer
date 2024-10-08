@@ -74,7 +74,7 @@ If you find this project useful for your research, please use the following BibT
 ```text
 @inproceedings{li2024beyond,
   title={Beyond MOT: Semantic Multi-Object Tracking},
-  author={Li, Yunhao and Wang, Hao and Ma, Xue and Yao, Jiali and Dong, Shaohua and Fan, Heng and Zhang, Libo},
+  author={Li, Yunhao and Li, Qin and Wang, Hao and Ma, Xue and Yao, Jiali and Dong, Shaohua and Fan, Heng and Zhang, Libo},
   booktitle={ECCV},
   year={2024}
 }

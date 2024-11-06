@@ -141,7 +141,7 @@ class BYTERCNN(CustomRCNN):
         images = self.preprocess_image(batched_inputs)
         gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
         num_images = len(images)
-        if iteration >= 0:
+        if iteration >= 20000:
             min_num = 6
         else:
             min_num = 8
@@ -164,7 +164,7 @@ class BYTERCNN(CustomRCNN):
         losses.update(proposal_losses)
         
         # strat tracking
-        if iteration >= 0:
+        if iteration >= 20000:
             pred_instances, video_features = self.inferene_tracks(batched_inputs)
             # end tracking
             pred_tracks = self._post_process_tracks(pred_instances, gt=False)

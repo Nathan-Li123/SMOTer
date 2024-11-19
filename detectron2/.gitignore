@@ -1,20 +1,14 @@
-backup
-datasets
-!/*/*/datasets/
-!/*/*/*/datasets/
-*.pth
-slurm-*.out
-slurm-output
 # output dir
 output
 instant_test_output
 inference_test_output
-bert-base-uncased
 
 
 *.png
-# *.json
+*.json
 *.diff
+*.jpg
+!/projects/DensePose/doc/images/*.jpg
 
 # compilation and distribution
 __pycache__
@@ -49,3 +43,11 @@ model_ts*.txt
 .idea
 .vscode
 _darcs
+
+# project dirs
+/detectron2/model_zoo/configs
+/datasets/*
+!/datasets/*.*
+/projects/*/datasets
+/models
+/snippet
